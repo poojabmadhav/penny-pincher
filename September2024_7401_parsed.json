@@ -1,0 +1,261 @@
+[
+  {
+    "date": "2024-09-21",
+    "merchant": "INTEREST CHARGED ON",
+    "amount": -72.61,
+    "description": "INTEREST CHARGED ON PURCHASES",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-21",
+    "merchant": "UBER *EATS HELP.UBER.COMCA",
+    "amount": -81.4,
+    "description": "UBER *EATS HELP.UBER.COMCA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-20",
+    "merchant": "LATE FEE FOR",
+    "amount": -39.0,
+    "description": "LATE FEE FOR PAYMENT DUE",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-20",
+    "merchant": "Amazon Prime*HE5F93MD3 Amzn.com/billWA",
+    "amount": -16.15,
+    "description": "Amazon Prime*HE5F93MD3 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-17",
+    "merchant": "AMAZON MKTPL*Z76GZ90W3 Amzn.com/billWA",
+    "amount": -33.7,
+    "description": "AMAZON MKTPL*Z76GZ90W3 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-16",
+    "merchant": "COYOTE GRILL LAGUNA",
+    "amount": -31.18,
+    "description": "COYOTE GRILL LAGUNA BEACH CA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-16",
+    "merchant": "UBER *EATS HELP.UBER.COMCA",
+    "amount": -103.89,
+    "description": "UBER *EATS HELP.UBER.COMCA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-16",
+    "merchant": "Prime Video *533JM9IR3",
+    "amount": -5.99,
+    "description": "Prime Video *533JM9IR3 888-802-3080 WA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-11",
+    "merchant": "VFS Services USA",
+    "amount": 178.0,
+    "description": "VFS Services USA Inc. 101-23456789 DC",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-10",
+    "merchant": "VFS Services USA",
+    "amount": -251.39,
+    "description": "VFS Services USA Inc. 101-23456789 DC",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-09",
+    "merchant": "AMAZON MKTPL*ZT89L4BT1 Amzn.com/billWA",
+    "amount": -48.48,
+    "description": "AMAZON MKTPL*ZT89L4BT1 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-06",
+    "merchant": "INTECORE PHYSICAL THER",
+    "amount": -11.1,
+    "description": "INTECORE PHYSICAL THER 949-7164548 CA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-05",
+    "merchant": "AMAZON MKTPL*ZT8AD9AW1 Amzn.com/billWA",
+    "amount": -82.3,
+    "description": "AMAZON MKTPL*ZT8AD9AW1 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-04",
+    "merchant": "ECOMM TAX SERVICE",
+    "amount": -99.0,
+    "description": "ECOMM TAX SERVICE WWW.ECOMMTAXSWY",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-04",
+    "merchant": "AMAZON MARK* ZT58K2CS0",
+    "amount": -78.53,
+    "description": "AMAZON MARK* ZT58K2CS0 HTTPSAMAZON.CWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-04",
+    "merchant": "AMAZON MKTPL*ZT41Q21J2 Amzn.com/billWA",
+    "amount": -24.82,
+    "description": "AMAZON MKTPL*ZT41Q21J2 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-04",
+    "merchant": "AMAZON MKTPL*RK0KO0W10 Amzn.com/billWA",
+    "amount": -21.44,
+    "description": "AMAZON MKTPL*RK0KO0W10 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-04",
+    "merchant": "AMAZON MARK* RK4D01YT0",
+    "amount": -23.69,
+    "description": "AMAZON MARK* RK4D01YT0 HTTPSAMAZON.CWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-03",
+    "merchant": "KHAN ACADEMY HTTPSWWW.KHANCA",
+    "amount": -4.0,
+    "description": "KHAN ACADEMY HTTPSWWW.KHANCA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-02",
+    "merchant": "Amazon.com*ZT1RG74Q2 Amzn.com/billWA",
+    "amount": -5.99,
+    "description": "Amazon.com*ZT1RG74Q2 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-02",
+    "merchant": "Amazon.com*ZT2GI14A2 Amzn.com/billWA",
+    "amount": -4.98,
+    "description": "Amazon.com*ZT2GI14A2 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-02",
+    "merchant": "Amazon.com*RK3465QH0 Amzn.com/billWA",
+    "amount": -142.14,
+    "description": "Amazon.com*RK3465QH0 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-09-02",
+    "merchant": "AMAZON MKTPL*RK8Z48631 Amzn.com/billWA",
+    "amount": -23.55,
+    "description": "AMAZON MKTPL*RK8Z48631 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-31",
+    "merchant": "FOREIGN TRANSACTION FEE",
+    "amount": -46.17,
+    "description": "FOREIGN TRANSACTION FEE",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-31",
+    "merchant": "EMIRATES MUMBAI",
+    "amount": -1539.33,
+    "description": "EMIRATES MUMBAI",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-31",
+    "merchant": "INTECORE PHYSICAL THER",
+    "amount": -11.1,
+    "description": "INTECORE PHYSICAL THER 949-7164548 CA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-30",
+    "merchant": "EMIRATES 62377875946-2800-7773999 NY",
+    "amount": -4230.48,
+    "description": "EMIRATES 62377875946-2800-7773999 NY",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-30",
+    "merchant": "SOUTH ORANGE COUNTY",
+    "amount": -1012.48,
+    "description": "SOUTH ORANGE COUNTY SURGI949-4577900 CA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-30",
+    "merchant": "AMAZON MARK* RK2NL1JQ1",
+    "amount": -15.09,
+    "description": "AMAZON MARK* RK2NL1JQ1 HTTPSAMAZON.CWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-30",
+    "merchant": "Amazon.com*RK06M33Z0 Amzn.com/billWA",
+    "amount": -50.52,
+    "description": "Amazon.com*RK06M33Z0 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-30",
+    "merchant": "AMAZON MARK* RK3HG06G2",
+    "amount": -86.19,
+    "description": "AMAZON MARK* RK3HG06G2 HTTPSAMAZON.CWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-27",
+    "merchant": "Netflix 1 8445052993",
+    "amount": -22.99,
+    "description": "Netflix 1 8445052993 CA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-26",
+    "merchant": "VFS Services USA",
+    "amount": -251.39,
+    "description": "VFS Services USA Inc. 101-23456789 DC",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-24",
+    "merchant": "Prime Video *R49927P41",
+    "amount": -0.99,
+    "description": "Prime Video *R49927P41 888-802-3080 WA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-24",
+    "merchant": "INTECORE PHYSICAL THER",
+    "amount": -11.1,
+    "description": "INTECORE PHYSICAL THER 949-7164548 CA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-24",
+    "merchant": "AMAZON MKTPL*R44V04262 Amzn.com/billWA",
+    "amount": -35.62,
+    "description": "AMAZON MKTPL*R44V04262 Amzn.com/billWA",
+    "source": "generic_cc_csv"
+  },
+  {
+    "date": "2024-08-23",
+    "merchant": "AMAZON RETA* R46V023N1",
+    "amount": -87.28,
+    "description": "AMAZON RETA* R46V023N1 WWW.AMAZON.COWA",
+    "source": "generic_cc_csv"
+  }
+]

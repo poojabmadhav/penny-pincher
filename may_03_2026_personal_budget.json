@@ -1,0 +1,35 @@
+{
+  "status": "success",
+  "account_type": "personal",
+  "current_state": {
+    "total_spent": 25015.3,
+    "by_category": {
+      "Food & Dining": {
+        "total": -25015.3,
+        "count": 5
+      }
+    },
+    "date_range": "2024-01-08 to 2024-03-31"
+  },
+  "budget_recommendations": {
+    "Food & Dining": {
+      "current_spend": 25015.3,
+      "recommended_budget": 23764.53,
+      "savings_potential": 1250.76,
+      "percentage_change": -5.0,
+      "reasoning": "Minimal optimization opportunity (125076% reduction possible).",
+      "priority": "discretionary"
+    }
+  },
+  "total_savings_potential": 1250.76,
+  "projected_budget": {
+    "monthly": 23764.53,
+    "quarterly": 71293.6,
+    "annual": 285174.42
+  },
+  "next_steps": [
+    "Review Food & Dining spending (target: reduce by $1250.76)",
+    "Set up alerts for recurring subscriptions and review quarterly"
+  ],
+  "created_at": "2026-05-03T14:01:46.898384"
+}

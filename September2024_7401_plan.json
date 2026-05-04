@@ -1,0 +1,121 @@
+{
+  "status": "success",
+  "account_type": "personal",
+  "current_state": {
+    "total_spent": 8428.06,
+    "by_category": {
+      "Travel": {
+        "total": -6094.59,
+        "count": 5
+      },
+      "Healthcare": {
+        "total": -1045.78,
+        "count": 4
+      },
+      "Shopping": {
+        "total": -764.32,
+        "count": 16
+      },
+      "Other": {
+        "total": -256.78,
+        "count": 4
+      },
+      "Food & Dining": {
+        "total": -216.47,
+        "count": 3
+      },
+      "Subscriptions": {
+        "total": -39.14,
+        "count": 2
+      },
+      "Entertainment": {
+        "total": -6.98,
+        "count": 2
+      },
+      "Education": {
+        "total": -4.0,
+        "count": 1
+      }
+    },
+    "date_range": "2024-08-23 to 2024-09-21"
+  },
+  "budget_recommendations": {
+    "Travel": {
+      "current_spend": 6094.59,
+      "recommended_budget": 5789.86,
+      "savings_potential": 304.73,
+      "percentage_change": -5.0,
+      "reasoning": "Minimal optimization opportunity (30473% reduction possible).",
+      "priority": "discretionary"
+    },
+    "Healthcare": {
+      "current_spend": 1045.78,
+      "recommended_budget": 993.49,
+      "savings_potential": 52.29,
+      "percentage_change": -5.0,
+      "reasoning": "Minimal optimization opportunity (5229% reduction possible).",
+      "priority": "essential"
+    },
+    "Shopping": {
+      "current_spend": 764.32,
+      "recommended_budget": 726.1,
+      "savings_potential": 38.22,
+      "percentage_change": -5.0,
+      "reasoning": "Minimal optimization opportunity (3822% reduction possible).",
+      "priority": "discretionary"
+    },
+    "Other": {
+      "current_spend": 256.78,
+      "recommended_budget": 243.94,
+      "savings_potential": 12.84,
+      "percentage_change": -5.0,
+      "reasoning": "Minimal optimization opportunity (1284% reduction possible).",
+      "priority": "discretionary"
+    },
+    "Food & Dining": {
+      "current_spend": 216.47,
+      "recommended_budget": 184.0,
+      "savings_potential": 32.47,
+      "percentage_change": -15.0,
+      "reasoning": "Spending is trending up. Opportunity to reduce by 15%.",
+      "priority": "discretionary"
+    },
+    "Subscriptions": {
+      "current_spend": 39.14,
+      "recommended_budget": 37.18,
+      "savings_potential": 1.96,
+      "percentage_change": -5.0,
+      "reasoning": "Minimal optimization opportunity (196% reduction possible).",
+      "priority": "recurring"
+    },
+    "Entertainment": {
+      "current_spend": 6.98,
+      "recommended_budget": 5.24,
+      "savings_potential": 1.75,
+      "percentage_change": -25.0,
+      "reasoning": "Spending is trending up. Opportunity to reduce by 25%.",
+      "priority": "discretionary"
+    },
+    "Education": {
+      "current_spend": 4.0,
+      "recommended_budget": 4.0,
+      "savings_potential": 0.0,
+      "percentage_change": 0.0,
+      "reasoning": "In line with spending patterns. Maintain current budget.",
+      "priority": "discretionary"
+    }
+  },
+  "total_savings_potential": 444.25,
+  "projected_budget": {
+    "monthly": 7983.81,
+    "quarterly": 23951.44,
+    "annual": 95805.77
+  },
+  "next_steps": [
+    "Review Travel spending (target: reduce by $304.73)",
+    "Review Healthcare spending (target: reduce by $52.29)",
+    "Review Shopping spending (target: reduce by $38.22)",
+    "Set up alerts for recurring subscriptions and review quarterly"
+  ],
+  "created_at": "2026-05-03T20:37:53.107190"
+}

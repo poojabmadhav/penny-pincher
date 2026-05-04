@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Budget Dashboard - Personal</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-content h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .date-range {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            gap: 15px;
+            transition: transform 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card.savings {
+            border-left: 4px solid #10b981;
+        }
+
+        .metric-icon {
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+        }
+
+        .metric-content {
+            flex: 1;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .metric-detail {
+            font-size: 12px;
+            color: #999;
+            margin-top: 3px;
+        }
+
+        /* Sections */
+        section {
+            padding: 40px;
+            border-top: 1px solid #eee;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        h3 {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .chart-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            height: 400px;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .data-table thead {
+            background: #f8f9fa;
+        }
+
+        .data-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 2px solid #eee;
+        }
+
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .amount {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Recommendations */
+        .recommendations-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .recommendation-item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .rec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .rec-header h4 {
+            margin: 0;
+            color: #333;
+        }
+
+        .savings-badge {
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .rec-detail {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .budget-bar {
+            background: #e5e7eb;
+            border-radius: 4px;
+            height: 30px;
+            margin-bottom: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .budget-current {
+            background: #fbbf24;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .budget-recommended {
+            background: #10b981;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .savings-summary {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .savings-summary p {
+            margin: 5px 0;
+        }
+
+        /* Action Section */
+        .action-list {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .action-list li {
+            margin-bottom: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Anomalies */
+        .anomalies-section {
+            background: #fef2f2;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .actions {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-content h1 {
+                font-size: 24px;
+            }
+
+            .actions {
+                margin-top: 15px;
+                justify-content: center;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendations-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+    <header class="header">
+        <div class="header-content">
+            <h1>💰 Privacy Budget Dashboard</h1>
+            <p class="subtitle">Personal Account</p>
+            <p class="date-range">Period: 2024-08-23 to 2024-09-21</p>
+        </div>
+        <div class="actions">
+            <button onclick="window.print()" class="btn btn-secondary">🖨️ Print</button>
+            <button onclick="downloadHTML()" class="btn btn-secondary">📥 Download</button>
+        </div>
+    </header>
+
+        
+    <section class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-icon">💸</div>
+            <div class="metric-content">
+                <p class="metric-label">Total Spending</p>
+                <p class="metric-value">$-8,428.06</p>
+                <p class="metric-detail">37 transactions</p>
+            </div>
+        </div>
+
+        <div class="metric-card savings">
+            <div class="metric-icon">✨</div>
+            <div class="metric-content">
+                <p class="metric-label">Savings Potential</p>
+                <p class="metric-value">$444.25</p>
+                <p class="metric-detail">-5.3% reduction</p>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-icon">📊</div>
+            <div class="metric-content">
+                <p class="metric-label">Recommended Budget</p>
+                <p class="metric-value">$-8,872.31</p>
+                <p class="metric-detail">Monthly goal</p>
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-icon">📈</div>
+            <div class="metric-content">
+                <p class="metric-label">Annual Projection</p>
+                <p class="metric-value">$95,805.77</p>
+                <p class="metric-detail">At recommended budget</p>
+            </div>
+        </div>
+    </section>
+
+        
+    <section class="charts-section">
+        <h2>📊 Spending Analysis</h2>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h3>Spending by Category</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3>Top Merchants</h3>
+                <canvas id="merchantChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Category Pie Chart
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        new Chart(categoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Travel", "Healthcare", "Shopping", "Other", "Food & Dining", "Subscriptions", "Entertainment", "Education"],
+                datasets: [{
+                    data: [6094.59, 1045.78, 764.32, 256.78, 216.47, 39.14, 6.98, 4.0],
+                    backgroundColor: ["#667eea", "#764ba2", "#f093fb", "#4facfe", "#43e97b", "#fa709a", "#fee140", "#30b0c8"],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = '$' + context.parsed.toFixed(2);
+                                return label + ': ' + value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Top Merchants Bar Chart
+        const merchantCtx = document.getElementById('merchantChart').getContext('2d');
+        new Chart(merchantCtx, {
+            type: 'bar',
+            data: {
+                labels: ["EMIRATES 62377875946-2800-7773999 NY", "EMIRATES MUMBAI", "SOUTH ORANGE COUNTY", "VFS Services USA", "UBER *EATS HELP.UBER.COMCA"],
+                datasets: [{
+                    label: 'Amount Spent',
+                    data: [-4230.48, -1539.33, -1012.48, -324.78, -185.29],
+                    backgroundColor: '#6366f1',
+                    borderColor: '#4f46e5',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return '$' + Math.abs(context.parsed.x).toFixed(2);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toFixed(0);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+        
+    <section class="anomalies-section">
+        <h2>⚠️ Anomalies Detected</h2>
+        <p class="section-description">These transactions are unusually high or unusual</p>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Merchant</th>
+                        <th>Amount</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+            <tr>
+                <td>2024-08-30</td>
+                <td>EMIRATES 62377875946-2800-7773999 NY</td>
+                <td class="amount">$-4230.48</td>
+                <td>Unusually large outflow (17.7x average)</td>
+            </tr>
+
+            <tr>
+                <td>2024-08-31</td>
+                <td>EMIRATES MUMBAI</td>
+                <td class="amount">$-1539.33</td>
+                <td>Unusually large outflow (6.4x average)</td>
+            </tr>
+
+            <tr>
+                <td>2024-08-30</td>
+                <td>SOUTH ORANGE COUNTY</td>
+                <td class="amount">$-1012.48</td>
+                <td>Unusually large outflow (4.2x average)</td>
+            </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+        
+    <section class="recommendations-section">
+        <h2>📋 Budget Recommendations</h2>
+        <p class="section-description">Categories where you can optimize spending</p>
+
+        <div class="recommendations-list">
+            
+            <div class="recommendation-item">
+                <div class="rec-header">
+                    <h4>Travel</h4>
+                    <span class="savings-badge">Save $304.73</span>
+                </div>
+                <p class="rec-detail">Minimal optimization opportunity (30473% reduction possible).</p>
+                <div class="budget-bar">
+                    <div class="budget-current" style="width: 92.41802750436342%">
+                        <span class="label">Current: $6094.59</span>
+                    </div>
+                </div>
+                <div class="budget-bar">
+                    <div class="budget-recommended" style="width: 92.05069747180382%">
+                        <span class="label">Recommended: $5789.86</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendation-item">
+                <div class="rec-header">
+                    <h4>Healthcare</h4>
+                    <span class="savings-badge">Save $52.29</span>
+                </div>
+                <p class="rec-detail">Minimal optimization opportunity (5229% reduction possible).</p>
+                <div class="budget-bar">
+                    <div class="budget-current" style="width: 67.65387053785143%">
+                        <span class="label">Current: $1045.78</span>
+                    </div>
+                </div>
+                <div class="budget-bar">
+                    <div class="budget-recommended" style="width: 66.52136940990566%">
+                        <span class="label">Recommended: $993.49</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendation-item">
+                <div class="rec-header">
+                    <h4>Shopping</h4>
+                    <span class="savings-badge">Save $38.22</span>
+                </div>
+                <p class="rec-detail">Minimal optimization opportunity (3822% reduction possible).</p>
+                <div class="budget-bar">
+                    <div class="budget-current" style="width: 60.45304986079473%">
+                        <span class="label">Current: $764.32</span>
+                    </div>
+                </div>
+                <div class="budget-bar">
+                    <div class="budget-recommended" style="width: 59.220291982709405%">
+                        <span class="label">Recommended: $726.10</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendation-item">
+                <div class="rec-header">
+                    <h4>Other</h4>
+                    <span class="savings-badge">Save $12.84</span>
+                </div>
+                <p class="rec-detail">Minimal optimization opportunity (1284% reduction possible).</p>
+                <div class="budget-bar">
+                    <div class="budget-current" style="width: 33.93060070297841%">
+                        <span class="label">Current: $256.78</span>
+                    </div>
+                </div>
+                <div class="budget-bar">
+                    <div class="budget-recommended" style="width: 32.79027878592359%">
+                        <span class="label">Recommended: $243.94</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendation-item">
+                <div class="rec-header">
+                    <h4>Food & Dining</h4>
+                    <span class="savings-badge">Save $32.47</span>
+                </div>
+                <p class="rec-detail">Spending is trending up. Opportunity to reduce by 15%.</p>
+                <div class="budget-bar">
+                    <div class="budget-current" style="width: 30.21340740017028%">
+                        <span class="label">Current: $216.47</span>
+                    </div>
+                </div>
+                <div class="budget-bar">
+                    <div class="budget-recommended" style="width: 26.900584795321635%">
+                        <span class="label">Recommended: $184.00</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="savings-summary">
+            <p>💰 <strong>Total Savings Potential: $444.25</strong></p>
+            <p>This represents the maximum you could save by optimizing spending patterns.</p>
+        </div>
+    </section>
+
+        
+    <section class="action-section">
+        <h2>🎯 Recommended Next Steps</h2>
+        <ol class="action-list">
+            <li><strong>Step 1:</strong> Review Travel spending (target: reduce by $304.73)</li>
+<li><strong>Step 2:</strong> Review Healthcare spending (target: reduce by $52.29)</li>
+<li><strong>Step 3:</strong> Review Shopping spending (target: reduce by $38.22)</li>
+<li><strong>Step 4:</strong> Set up alerts for recurring subscriptions and review quarterly</li>
+
+        </ol>
+    </section>
+
+        
+    <footer class="footer">
+        <p>Generated by Privacy Budget MVP on May 03, 2026 at 08:37 PM</p>
+        <p>All data stays private. This report is generated locally and never sent anywhere.</p>
+    </footer>
+
+    </div>
+    <script>
+        
+        function downloadHTML() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = document.title.replace(/[^a-z0-9]/gi, '_') + '.html';
+            a.click();
+        }
+
+        // Print-friendly styles
+        window.addEventListener('beforeprint', function() {
+            document.body.style.background = 'white';
+        });
+
+        window.addEventListener('afterprint', function() {
+            document.body.style.background = null;
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+[
+  {
+    "date": "2024-03-31",
+    "merchant": "Interest Deposit",
+    "amount": 1.2,
+    "description": "Interest Deposit",
+    "source": "amex_csv"
+  },
+  {
+    "date": "2024-02-29",
+    "merchant": "Interest Deposit",
+    "amount": 1.12,
+    "description": "Interest Deposit",
+    "source": "amex_csv"
+  },
+  {
+    "date": "2024-01-31",
+    "merchant": "Interest Deposit",
+    "amount": 7.38,
+    "description": "Interest Deposit",
+    "source": "amex_csv"
+  },
+  {
+    "date": "2024-01-08",
+    "merchant": "Wire Transfer Fee",
+    "amount": -25.0,
+    "description": "Wire Transfer Fee Domestic Outgoing",
+    "source": "amex_csv"
+  },
+  {
+    "date": "2024-01-08",
+    "merchant": "Wire Transfer Domestic",
+    "amount": -25000.0,
+    "description": "Wire Transfer Domestic Outgoing JPMORGAN CHASE BANK, NA",
+    "source": "amex_csv"
+  }
+]

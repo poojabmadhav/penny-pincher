@@ -1,0 +1,75 @@
+{
+  "status": "success",
+  "account_type": "personal",
+  "summary": {
+    "total_spent": -25015.3,
+    "transaction_count": 5,
+    "date_range": "2024-01-08 to 2024-03-31",
+    "account_type": "personal",
+    "average_transaction": -5003.06
+  },
+  "by_category": {
+    "Food & Dining": {
+      "total": -25015.3,
+      "count": 5,
+      "percentage": 0,
+      "average_transaction": -5003.06,
+      "trend": "down",
+      "top_merchants": [
+        {
+          "merchant": "Wire Transfer Domestic",
+          "total": -25000.0
+        },
+        {
+          "merchant": "Wire Transfer Fee",
+          "total": -25.0
+        },
+        {
+          "merchant": "Interest Deposit",
+          "total": 9.7
+        }
+      ]
+    }
+  },
+  "insights": [
+    "Highest spending category: Food & Dining ($25015.30)",
+    "Recurring merchants account for $9.70 across 1 merchants",
+    "Total inflow: $9.70",
+    "Total outflow: $25025.00"
+  ],
+  "anomalies": [
+    {
+      "date": "2024-01-08",
+      "merchant": "Wire Transfer Domestic",
+      "amount": -25000.0,
+      "category": "Food & Dining",
+      "description": "Wire Transfer Domestic Outgoing JPMORGAN CHASE BANK, NA",
+      "reason": "Unusually large outflow (2.0x average)"
+    },
+    {
+      "date": "2024-01-31",
+      "merchant": "Interest Deposit",
+      "amount": 7.38,
+      "category": "Food & Dining",
+      "description": "Interest Deposit",
+      "reason": "Unusually high (2.3x average)"
+    }
+  ],
+  "top_merchants": [
+    {
+      "merchant": "Wire Transfer Domestic",
+      "total": -25000.0,
+      "count": 1
+    },
+    {
+      "merchant": "Wire Transfer Fee",
+      "total": -25.0,
+      "count": 1
+    },
+    {
+      "merchant": "Interest Deposit",
+      "total": 9.7,
+      "count": 3
+    }
+  ]
+}

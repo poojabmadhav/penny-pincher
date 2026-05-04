@@ -1,0 +1,1143 @@
+[
+  {
+    "date": "2024-12-27",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-24",
+    "merchant": "PAYMENT 241224 1039182159567",
+    "amount": -100.0,
+    "description": "VENMO PAYMENT 241224 1039182159567 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-20",
+    "merchant": "125",
+    "amount": -2704.78,
+    "description": "CHECK # 125",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-20",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 5258.66,
+    "description": "SLALOM LLC PAYMENTS 241220 2819701 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-17",
+    "merchant": "AUTOPAY PAYMENT 241216",
+    "amount": -506.68,
+    "description": "CITI AUTOPAY PAYMENT 241216 191568140460033 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-17",
+    "merchant": "SO CAL EDISON",
+    "amount": -128.36,
+    "description": "SO CAL EDISON CO DIRECTPAY 700073347101 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-16",
+    "merchant": "PAYMENT 241216 1039010628923",
+    "amount": -320.0,
+    "description": "VENMO PAYMENT 241216 1039010628923 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-12",
+    "merchant": "TO COASTAL COMMUNITY",
+    "amount": -4000.0,
+    "description": "ONLINE TRANSFER TO COASTAL COMMUNITY BANK CHK XXXXXX3365 D. SRINVASAMURTHY REF #FP0QKSNX9G ON 12/12/24",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-11",
+    "merchant": "TRANSFER BINDUMADHAV,POO POOJA",
+    "amount": 4000.0,
+    "description": "AMERICAN EXPRESS TRANSFER BINDUMADHAV,POO POOJA BINDUMADHAV",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-06",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 5258.66,
+    "description": "SLALOM LLC PAYMENTS 241206 2803171 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-02",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 120124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-02",
+    "merchant": "PAYMENT 241201 1038646987963",
+    "amount": -46.0,
+    "description": "VENMO PAYMENT 241201 1038646987963 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-12-02",
+    "merchant": "PAYMENT 241201 1038646969650",
+    "amount": -46.0,
+    "description": "VENMO PAYMENT 241201 1038646969650 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-26",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-22",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 5055.78,
+    "description": "SLALOM LLC PAYMENTS 241122 2790515 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-20",
+    "merchant": "WT FED#08559 COMMUNITY",
+    "amount": -15000.0,
+    "description": "WT FED#08559 COMMUNITY FEDERAL /FTR/BNF=Regalis Capital Corp SRF# OW00005130253547 TRN#241120079915 RFB# OW00005130253547",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-20",
+    "merchant": "WIRE TRANS SVC",
+    "amount": -25.0,
+    "description": "WIRE TRANS SVC CHARGE - SEQUENCE: 241120079915 SRF# OW00005130253547 TRN#241120079915 RFB# OW00005130253547",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-19",
+    "merchant": "TRANSFER BINDUMADHAV,POO POOJA",
+    "amount": 15000.0,
+    "description": "AMERICAN EXPRESS TRANSFER BINDUMADHAV,POO POOJA BINDUMADHAV",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-18",
+    "merchant": "AUTOPAY PAYMENT 241115",
+    "amount": -401.08,
+    "description": "CITI AUTOPAY PAYMENT 241115 191541415930095 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-14",
+    "merchant": "SO CAL EDISON",
+    "amount": -1992.68,
+    "description": "SO CAL EDISON CO DIRECTPAY 700073347101 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-12",
+    "merchant": "TO COASTAL COMMUNITY",
+    "amount": -5000.0,
+    "description": "ONLINE TRANSFER TO COASTAL COMMUNITY BANK CHK XXXXXX3365 D. SRINVASAMURTHY REF #F20Q7MTJ8R ON 11/11/24",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-12",
+    "merchant": "TO ARKULGUD ADI",
+    "amount": -103.0,
+    "description": "ZELLE TO ARKULGUD ADI ON 11/11 REF #RP0Y7NX6P5 DIWALI PARTY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-08",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4833.6,
+    "description": "SLALOM LLC PAYMENTS 241108 2773715 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-05",
+    "merchant": "PAYMENT 241105 1038033728976",
+    "amount": -280.0,
+    "description": "VENMO PAYMENT 241105 1038033728976 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-05",
+    "merchant": "PAYMENT 241105 1038043414918",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 241105 1038043414918 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-04",
+    "merchant": "WITHDRAWAL AUTHORIZED ON",
+    "amount": -400.0,
+    "description": "ATM WITHDRAWAL AUTHORIZED ON 11/04 27250 Alicia Pkwy Laguna Niguel CA 0006528 ATM ID 0842E CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-11-01",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 110124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-30",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -3500.0,
+    "description": "CITI CARD ONLINE PAYMENT 241029 431523998361611 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-28",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-28",
+    "merchant": "PAYMENT 241026 1037814369457",
+    "amount": -150.0,
+    "description": "VENMO PAYMENT 241026 1037814369457 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-28",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 10/26 REF # BACRTJLLSN0O",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-25",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4606.59,
+    "description": "SLALOM LLC PAYMENTS 241025 2758138 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-23",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -3500.0,
+    "description": "CITI CARD ONLINE PAYMENT 241022 431520545561044 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-23",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 10/22 REF # BACNYR98QJLL",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-17",
+    "merchant": "AUTOPAY PAYMENT 241016",
+    "amount": -174.3,
+    "description": "CITI AUTOPAY PAYMENT 241016 191515393890020 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-11",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.02,
+    "description": "SLALOM LLC PAYMENTS 241011 2747254 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-10",
+    "merchant": "TO COASTAL COMMUNITY",
+    "amount": -5000.0,
+    "description": "ONLINE TRANSFER TO COASTAL COMMUNITY BANK CHK XXXXXX3365 D. SRINVASAMURTHY REF #FP0PTTCRYG ON 10/10/24",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-09",
+    "merchant": "TRANSFER BINDUMADHAV,POO POOJA",
+    "amount": 8000.0,
+    "description": "AMERICAN EXPRESS TRANSFER BINDUMADHAV,POO POOJA BINDUMADHAV",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-04",
+    "merchant": "CASHED CHECK #",
+    "amount": -700.0,
+    "description": "CASHED CHECK # 124",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-01",
+    "merchant": "PAYMENT 241001 1037294212606",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 241001 1037294212606 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-10-01",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 100124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-27",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.01,
+    "description": "SLALOM LLC PAYMENTS 240927 2725497 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-26",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-25",
+    "merchant": "WITHDRAWAL AUTHORIZED ON",
+    "amount": -300.0,
+    "description": "ATM WITHDRAWAL AUTHORIZED ON 09/25 27250 Alicia Pkwy Laguna Niguel CA 0009781 ATM ID 0842E CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-24",
+    "merchant": "CASHED CHECK #",
+    "amount": -1500.0,
+    "description": "CASHED CHECK # 123",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-19",
+    "merchant": "122",
+    "amount": -358.0,
+    "description": "CHECK # 122",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-17",
+    "merchant": "PAYMENT 240917 1036998795410",
+    "amount": -25.0,
+    "description": "VENMO PAYMENT 240917 1036998795410 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-17",
+    "merchant": "AUTOPAY PAYMENT 240916",
+    "amount": -182.02,
+    "description": "CITI AUTOPAY PAYMENT 240916 191489479510130 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-13",
+    "merchant": "CASHED CHECK #",
+    "amount": -2000.0,
+    "description": "CASHED CHECK # 121",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-13",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.03,
+    "description": "SLALOM LLC PAYMENTS 240913 2713473 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-03",
+    "merchant": "PAYMENT 240903 1036700741646",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 240903 1036700741646 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-09-03",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 090124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-30",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.02,
+    "description": "SLALOM LLC PAYMENTS 240830 2695126 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-30",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 65.0,
+    "description": "SLALOM LLC PAYMENTS 240830 2689366 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-27",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-26",
+    "merchant": "PAYMENT 240826 1036525668677",
+    "amount": -50.0,
+    "description": "VENMO PAYMENT 240826 1036525668677 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-19",
+    "merchant": "104",
+    "amount": -13000.0,
+    "description": "CHECK # 104",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-19",
+    "merchant": "AUTOPAY PAYMENT 240816",
+    "amount": -433.88,
+    "description": "CITI AUTOPAY PAYMENT 240816 081462771060537 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-19",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -16838.82,
+    "description": "CITI CARD ONLINE PAYMENT 240818 431464418473987 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-19",
+    "merchant": "PAYMENT 240818 1036367572368",
+    "amount": -53.5,
+    "description": "VENMO PAYMENT 240818 1036367572368 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-16",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.03,
+    "description": "SLALOM LLC PAYMENTS 240816 2677159 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-06",
+    "merchant": "PAYMENT 240806 1036122662202",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 240806 1036122662202 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-05",
+    "merchant": "Why Unified Corp",
+    "amount": 28310.0,
+    "description": "Why Unified Corp MercuryACH 240805 MRCR-K70U0RFWY3 Refund for Order #19619, #19628 , #19631",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-02",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.02,
+    "description": "SLALOM LLC PAYMENTS 240802 2659370 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-02",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 65.0,
+    "description": "SLALOM LLC PAYMENTS 240802 2672225 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-08-01",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 080124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-29",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -2000.0,
+    "description": "CITI CARD ONLINE PAYMENT 240728 431446243557150 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-29",
+    "merchant": "TO COASTAL COMMUNITY",
+    "amount": -2000.0,
+    "description": "ONLINE TRANSFER TO COASTAL COMMUNITY BANK CHK XXXXXX3365 D. SRINVASAMURTHY REF #F20NZSS6CJ ITALY EXPENSES",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-26",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-19",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.01,
+    "description": "SLALOM LLC PAYMENTS 240719 2650602 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-18",
+    "merchant": "AUTOPAY PAYMENT 240717",
+    "amount": -292.2,
+    "description": "CITI AUTOPAY PAYMENT 240717 081436850353081 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-10",
+    "merchant": "PAYMENT 240710 1035563261716",
+    "amount": -180.0,
+    "description": "VENMO PAYMENT 240710 1035563261716 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-08",
+    "merchant": "NON-WELLS FARGO ATM",
+    "amount": -5.0,
+    "description": "NON-WELLS FARGO ATM TRANSACTION FEE",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-08",
+    "merchant": "NON-WF ATM WITHDRAWAL",
+    "amount": -78.18,
+    "description": "NON-WF ATM WITHDRAWAL AUTHORIZED ON 07/08 CITY ROMA ROMA RM ITA 464190643278901 ATM ID 93442699 CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-05",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.03,
+    "description": "SLALOM LLC PAYMENTS 240705 2633067 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-03",
+    "merchant": "NON-WELLS FARGO ATM",
+    "amount": -5.0,
+    "description": "NON-WELLS FARGO ATM TRANSACTION FEE",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-03",
+    "merchant": "NON-WF ATM WITHDRAWAL",
+    "amount": -372.29,
+    "description": "NON-WF ATM WITHDRAWAL AUTHORIZED ON 07/03 PIAZZETTA A FERRARO 9 Capri ITA 464185315289640 ATM ID ENIT1610 CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-03",
+    "merchant": "NON-WF ATM BALANCE",
+    "amount": -2.5,
+    "description": "NON-WF ATM BALANCE INQUIRY FEE 07/03 PIAZZETTA A Capri ITA ATM ID ENIT1610 CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-02",
+    "merchant": "PAYMENT 240702 1035413245044",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 240702 1035413245044 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-01",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 070124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-01",
+    "merchant": "PAYMENT 240630 1035349053234",
+    "amount": -125.0,
+    "description": "VENMO PAYMENT 240630 1035349053234 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-01",
+    "merchant": "NON-WELLS FARGO ATM",
+    "amount": -5.0,
+    "description": "NON-WELLS FARGO ATM TRANSACTION FEE",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-01",
+    "merchant": "NON-WF ATM WITHDRAWAL",
+    "amount": -90.36,
+    "description": "NON-WF ATM WITHDRAWAL AUTHORIZED ON 06/30 AEROPORTO DI NAPOLI NAPOLI ITA 464182643784336 ATM ID ENIT4734 CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-07-01",
+    "merchant": "NON-WF ATM BALANCE",
+    "amount": -2.5,
+    "description": "NON-WF ATM BALANCE INQUIRY FEE 06/30 AEROPORTO DI NAPOLI ITA ATM ID ENIT4734 CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-26",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-24",
+    "merchant": "PAYMENT 240624 1035231658242",
+    "amount": -30.0,
+    "description": "VENMO PAYMENT 240624 1035231658242 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-21",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.02,
+    "description": "SLALOM LLC PAYMENTS 240621 2619754 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-21",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 130.0,
+    "description": "SLALOM LLC PAYMENTS 240621 2612218 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-18",
+    "merchant": "AUTOPAY PAYMENT 240617",
+    "amount": -456.16,
+    "description": "CITI AUTOPAY PAYMENT 240617 081410932850681 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-10",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -4000.0,
+    "description": "CITI CARD ONLINE PAYMENT 240609 431402976140138 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-10",
+    "merchant": "WITHDRAWAL AUTHORIZED ON",
+    "amount": -400.0,
+    "description": "ATM WITHDRAWAL AUTHORIZED ON 06/09 27250 Alicia Pkwy Laguna Niguel CA 0000413 ATM ID 0842E CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-10",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 06/08 REF # BACNAZAKY354",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-07",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.02,
+    "description": "SLALOM LLC PAYMENTS 240607 2599819 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-04",
+    "merchant": "PAYMENT 240604 1034824352281",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 240604 1034824352281 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-06-03",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 060124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-29",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-28",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -9000.0,
+    "description": "CITI CARD ONLINE PAYMENT 240524 431389600328296 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-24",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -3500.0,
+    "description": "CITI CARD ONLINE PAYMENT 240523 431388722778191 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-24",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 05/24 REF # BACQJ8KSW5SR",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-24",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.02,
+    "description": "SLALOM LLC PAYMENTS 240524 2581385 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-23",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 05/23 REF # BACLFTZN1ALH",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-20",
+    "merchant": "AUTOPAY PAYMENT 240517",
+    "amount": -553.61,
+    "description": "CITI AUTOPAY PAYMENT 240517 081384146401537 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-14",
+    "merchant": "HARLAND CLARKE CHECK/ACC",
+    "amount": -18.0,
+    "description": "HARLAND CLARKE CHECK/ACC. 051324 00009837575488 DILEEP SRINVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-10",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.02,
+    "description": "SLALOM LLC PAYMENTS 240510 2576051 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-02",
+    "merchant": "PAYMENT 240502 1034150699292",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 240502 1034150699292 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-01",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 050124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-05-01",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -3500.0,
+    "description": "CITI CARD ONLINE PAYMENT 240430 431368868892238 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-29",
+    "merchant": "PAYMENT 240427 1034037450964",
+    "amount": -50.0,
+    "description": "VENMO PAYMENT 240427 1034037450964 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-26",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-26",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.03,
+    "description": "SLALOM LLC PAYMENTS 240426 2555989 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-18",
+    "merchant": "AUTOPAY PAYMENT 240417",
+    "amount": -467.9,
+    "description": "CITI AUTOPAY PAYMENT 240417 081358226360655 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-12",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -1000.0,
+    "description": "CITI CARD ONLINE PAYMENT 240411 431352456966757 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-12",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.03,
+    "description": "SLALOM LLC PAYMENTS 240412 2534813 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-12",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 65.0,
+    "description": "SLALOM LLC PAYMENTS 240412 2532345 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-08",
+    "merchant": "TO HANDY MAN",
+    "amount": -150.0,
+    "description": "ZELLE TO HANDY MAN ON 04/08 REF #RP0S4Z26NQ",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-02",
+    "merchant": "PAYMENT 240402 1033523169463",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 240402 1033523169463 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-01",
+    "merchant": "BB TUITION MGMT",
+    "amount": -336.0,
+    "description": "BB TUITION MGMT BB TUITION 47771404 Dileep Srinivasamurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-01",
+    "merchant": "WF HOME MTG",
+    "amount": -6617.2,
+    "description": "WF HOME MTG AUTO PAY 040124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-04-01",
+    "merchant": "PAYMENT 240330 1033450222126",
+    "amount": -284.0,
+    "description": "VENMO PAYMENT 240330 1033450222126 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-29",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4137.02,
+    "description": "SLALOM LLC PAYMENTS 240329 2518444 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-29",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 65.0,
+    "description": "SLALOM LLC PAYMENTS 240329 2527521 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-26",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-25",
+    "merchant": "COSTCO CASH REWARD",
+    "amount": 917.43,
+    "description": "COSTCO CASH REWARD 240324 811336080951687 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-19",
+    "merchant": "AUTOPAY PAYMENT 240318",
+    "amount": -365.64,
+    "description": "CITI AUTOPAY PAYMENT 240318 081332307390424 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-18",
+    "merchant": "SO CAL EDISON",
+    "amount": -1.2,
+    "description": "SO CAL EDISON CO DIRECTPAY 700073347101 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-15",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4098.01,
+    "description": "SLALOM LLC PAYMENTS 240315 2500070 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-08",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4564.92,
+    "description": "SLALOM LLC PAYMENTS 240308 2492969 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-01",
+    "merchant": "WF HOME MTG",
+    "amount": -6000.67,
+    "description": "WF HOME MTG AUTO PAY 030124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-01",
+    "merchant": "BB TUITION MGMT",
+    "amount": -336.0,
+    "description": "BB TUITION MGMT BB TUITION 47223336 Dileep Srinivasamurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-01",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4039.51,
+    "description": "SLALOM LLC PAYMENTS 240301 2475008 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-03-01",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 65.0,
+    "description": "SLALOM LLC PAYMENTS 240301 2468897 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-27",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-20",
+    "merchant": "AUTOPAY PAYMENT 240219",
+    "amount": -451.86,
+    "description": "CITI AUTOPAY PAYMENT 240219 081308150343322 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-20",
+    "merchant": "PAYMENT 240219 1032635615842",
+    "amount": -110.0,
+    "description": "VENMO PAYMENT 240219 1032635615842 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-16",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4039.52,
+    "description": "SLALOM LLC PAYMENTS 240216 2453518 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-14",
+    "merchant": "SO CAL EDISON",
+    "amount": -1.09,
+    "description": "SO CAL EDISON CO DIRECTPAY 700073347101 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-12",
+    "merchant": "PAYMENT 240212 1032497322763",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 240212 1032497322763 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-08",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -3500.0,
+    "description": "CITI CARD ONLINE PAYMENT 240207 431296793523002 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-06",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 02/06 REF # BACBVZWUD8N4",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-05",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -3500.0,
+    "description": "CITI CARD ONLINE PAYMENT 240204 431294152267069 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-05",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 02/03 REF # BACJW1C6ZAQR",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-02",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4039.52,
+    "description": "SLALOM LLC PAYMENTS 240202 2445582 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-02",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 65.0,
+    "description": "SLALOM LLC PAYMENTS 240202 2432271 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-01",
+    "merchant": "WF HOME MTG",
+    "amount": -6000.67,
+    "description": "WF HOME MTG AUTO PAY 020124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-02-01",
+    "merchant": "BB TUITION MGMT",
+    "amount": -336.0,
+    "description": "BB TUITION MGMT BB TUITION 46544872 Dileep Srinivasamurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-26",
+    "merchant": "AMERICANEXPRESS TRANSFER 000320008633329",
+    "amount": -150.0,
+    "description": "AMERICANEXPRESS TRANSFER 000320008633329 BINDUMADHAV,POOJA",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-22",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -3500.0,
+    "description": "CITI CARD ONLINE PAYMENT 240121 421281719015727 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-22",
+    "merchant": "TO CLEANERS ROSA",
+    "amount": -180.0,
+    "description": "ZELLE TO CLEANERS ROSA ON 01/20 REF #PP0RWG39HG",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-22",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 01/20 REF # BACOXOWKH62E",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-19",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4039.52,
+    "description": "SLALOM LLC PAYMENTS 240119 2420815 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-18",
+    "merchant": "AUTOPAY PAYMENT 240117",
+    "amount": -386.98,
+    "description": "CITI AUTOPAY PAYMENT 240117 081279638390133 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-18",
+    "merchant": "SO CAL EDISON",
+    "amount": -1.13,
+    "description": "SO CAL EDISON CO DIRECTPAY 700073347101 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-17",
+    "merchant": "FROM POOJA BINDUMADHAV",
+    "amount": 3500.0,
+    "description": "ZELLE FROM POOJA BINDUMADHAV ON 01/17 REF # BACOID8UNC7M",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-16",
+    "merchant": "CARD ONLINE PAYMENT",
+    "amount": -3000.0,
+    "description": "CITI CARD ONLINE PAYMENT 240115 421275779575618 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-16",
+    "merchant": "PAYMENT 240114 1031903883767",
+    "amount": -290.0,
+    "description": "VENMO PAYMENT 240114 1031903883767 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-05",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 4084.59,
+    "description": "SLALOM LLC PAYMENTS 240105 2401696 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-05",
+    "merchant": "SLALOM LLC PAYMENTS",
+    "amount": 165.0,
+    "description": "SLALOM LLC PAYMENTS 240105 2398634 Dileep SrinvasaMurthy",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-03",
+    "merchant": "NON-WELLS FARGO ATM",
+    "amount": -2.5,
+    "description": "NON-WELLS FARGO ATM TRANSACTION FEE",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-03",
+    "merchant": "NON-WF ATM WITHDRAWAL",
+    "amount": -209.99,
+    "description": "NON-WF ATM WITHDRAWAL AUTHORIZED ON 01/02 3600 LAS VEGAS BLVD SO LAS VEGAS NV 384003189143082 ATM ID NVBGOX02 CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-03",
+    "merchant": "NON-WF ATM BALANCE",
+    "amount": -2.5,
+    "description": "NON-WF ATM BALANCE INQUIRY FEE 01/02 3600 LAS VEG LAS VEGAS NV ATM ID NVBGOX02 CARD 6770",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-02",
+    "merchant": "PAYMENT 240102 1031666484073",
+    "amount": -85.0,
+    "description": "VENMO PAYMENT 240102 1031666484073 DILEEP MURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-02",
+    "merchant": "WF HOME MTG",
+    "amount": -6000.67,
+    "description": "WF HOME MTG AUTO PAY 010124 XXXXXX4096 DILEEP SRINIVASAMURTHY",
+    "source": "wells_fargo_csv"
+  },
+  {
+    "date": "2024-01-02",
+    "merchant": "BB TUITION MGMT",
+    "amount": -336.0,
+    "description": "BB TUITION MGMT BB TUITION 45952453 Dileep Srinivasamurthy",
+    "source": "wells_fargo_csv"
+  }
+]
