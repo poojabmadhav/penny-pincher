@@ -86,11 +86,11 @@ python3 privacy_budget.py dashboard analysis.json plan.json personal
 
 ---
 
-## 🔵 Phase 2: Progressive Web App (Planned)
+## 🟢 Phase 2: Progressive Web App (In Progress)
 
 ### Decision Made
 
-**Solution:** Progressive Web App (PWA)
+**Solution:** Progressive Web App (PWA) - **PennyPincher**
 
 **Why:**
 - Zero friction (just visit URL)
@@ -100,15 +100,58 @@ python3 privacy_budget.py dashboard analysis.json plan.json personal
 - Can work offline
 - Professional, shareable
 
-### Target User Experience
+### Sessions & Progress
+
+| Session | Task | Status | Completion Date |
+|---------|------|--------|-----------------|
+| Session 1 | React + Vite + TypeScript + Tailwind setup, upload component | ✅ Complete | May 3, 2026 |
+| Session 2 | Dashboard UI components, multi-file upload, localStorage history | ✅ Complete | May 3, 2026 |
+| Session 3 | CSV parsing, real analysis logic, transaction details, recategorization | 🔵 Planned | TBD |
+| Session 4 | Testing across devices, deploy to Vercel with domain | 🔵 Planned | TBD |
+
+### What's Built So Far (Sessions 1-2)
+
+**Frontend (React + TypeScript + Tailwind):**
+- ✅ Upload component with drag-and-drop CSV support
+- ✅ Personal/Business account type selector
+- ✅ Dashboard shell with header and sidebar
+- ✅ Summary cards (total spend, transaction count, date range, top category)
+- ✅ Category breakdown with CSS horizontal bars (percentage recalculation fix)
+- ✅ Top merchants ranked list
+- ✅ Insights list with icons
+- ✅ Anomalies list with flagged transactions and toggle
+- ✅ File history sidebar (shows up when 2+ files uploaded)
+
+**State Management:**
+- ✅ Multi-file upload support
+- ✅ localStorage persistence (history capped at 20 records)
+- ✅ File switching between analyses
+- ✅ "Upload Another" navigation flow
+
+**Data:**
+- ✅ TypeScript interfaces for AnalysisResult, FileRecord, and Transaction
+- ✅ Mock analysis data (Sept 2024, 8 categories, 5 merchants, 3 anomalies)
+- ✅ Proper currency and date formatting
+
+**Testing:**
+- ✅ Builds without TypeScript errors
+- ✅ Dev server running at http://localhost:5173
+- ✅ Upload → dashboard flow works
+- ✅ Multiple files + history switching works
+- ✅ localStorage persistence works (survives reload)
+
+### Target User Experience (Final)
 
 ```
-1. User visits: privacy-budget.app
+1. User visits: pennyPincher.app
 2. Uploads CSV file (drag & drop)
 3. Selects "Personal" or "Business"
 4. Gets gorgeous dashboard instantly
-5. Downloads or shares results
-6. No setup, no passwords, no bank connections
+5. Can upload more files, switch between them
+6. Can click category to see individual transactions
+7. Can reassign transaction categories
+8. Downloads or shares results
+9. No setup, no passwords, no bank connections
 ```
 
 ### Tech Stack
@@ -166,14 +209,23 @@ python3 privacy_budget.py dashboard analysis.json plan.json personal
 ✅ Dashboard has interactive charts
 ✅ Works with real bank statements
 
-### What Needs Phase 2
+### What's Remaining
 
-❌ Zero-friction web interface
-❌ Mobile support (phone/tablet)
-❌ No installation required
-❌ Visual beauty at web scale
-❌ Shareable URL
-❌ Mass adoption capability
+**Session 3 (Analysis Logic):**
+- ❌ CSV parsing (Wells Fargo, AmEx, standard formats)
+- ❌ Real analysis backend (port Python agents to JavaScript or call API)
+- ❌ Populate real AnalysisResult data
+- ❌ Transaction detail modal (double-click category)
+- ❌ Transaction recategorization (dropdown to change category)
+- ❌ Persist category overrides to localStorage
+
+**Session 4 (Polish & Deploy):**
+- ❌ Test on mobile, tablet, desktop
+- ❌ Fix responsive design issues
+- ❌ Lighthouse optimization
+- ❌ Setup Vercel deployment
+- ❌ Configure custom domain (pennyPincher.app)
+- ❌ Production build and testing
 
 ---
 
@@ -223,55 +275,82 @@ Privacy Budget MVP/
 
 ---
 
-## 🚀 How to Resume Phase 2
+## 🚀 How to Resume (Session 3)
 
-### When You're Ready:
+### When You're Ready to Continue:
 
-1. **Read:** `NEXT_PHASE_PWA.md`
-   - Complete overview of Phase 2
-   - Architecture and tech stack
-   - 4-week timeline
-   - All design decisions documented
+**Environment:**
+- Dev server is already running at `http://localhost:5173`
+- Project structure is fully set up in `web-app/` folder
+- All dependencies installed (npm install already done)
 
-2. **Setup:**
-   - Create new React project
-   - Set up Tailwind CSS
-   - Start from Week 1 timeline
+**To Resume:**
 
-3. **Implementation:**
-   - Follow 4-week plan
-   - Port Python agents to JavaScript
-   - Build beautiful React UI
-   - Deploy to Vercel
+1. **Start dev server** (if not already running):
+   ```bash
+   cd web-app
+   npm run dev
+   ```
+
+2. **Session 3 tasks:**
+   - Implement CSV parsing (Wells Fargo, AmEx, standard CSVs)
+   - Add transaction data to AnalysisResult interface
+   - Create real mock data with actual transactions from parsed CSVs
+   - Build transaction detail modal (double-click category row)
+   - Add category dropdown for recategorization
+   - Persist category changes to localStorage
+   - Replace mock data with real analysis backend
+
+3. **Architecture Decision Needed:**
+   - Option A: Port Python agents to TypeScript (runs in browser)
+   - Option B: Call Python backend API (requires server)
+   - Option C: Use existing Python CLI and wrap it
 
 ### Key Documents to Reference
 
-- `NEXT_PHASE_PWA.md` - Complete Phase 2 guide
-- `Design Doc.md` - Original architecture (agents still apply)
-- `ALL_OPTIONS.md` - User workflows (will translate to web UX)
-- `README.md` - Feature reference
+- `NEXT_PHASE_PWA.md` - Original Phase 2 planning guide
+- `Design Doc.md` - Architecture and agent design
+- `README.md` - Feature reference for what Python agents do
+- `/web-app/src/` - All React components (well-organized and typed)
+- `/web-app/src/types/index.ts` - All TypeScript interfaces
 
 ---
 
-## 💾 Quick Checklist for Resuming
+## 💾 Quick Checklist for Resuming Session 3
 
-### Before Starting Phase 2:
+### Already Done ✅
+- [x] React + Vite + TypeScript setup
+- [x] Tailwind CSS configured
+- [x] All UI components built and styled
+- [x] Multi-file upload flow working
+- [x] localStorage history persistence
+- [x] Type definitions complete
+- [x] Build succeeds with no errors
+- [x] Dev server running
 
-- [ ] Review `NEXT_PHASE_PWA.md`
-- [ ] Review `Design Doc.md`
-- [ ] Look at example HTML dashboard (open `may_03_2026_personal_dashboard.html`)
-- [ ] Decide on domain name (privacy-budget.app?)
-- [ ] Decide on color scheme (purple/green suggested)
-- [ ] Get Vercel account (free)
-- [ ] Get Figma account (free) for mockups
+### Session 3 Checklist:
 
-### Phase 2 Kickoff:
+- [ ] Decide: Port Python agents to JS vs call API vs use existing CLI
+- [ ] Implement CSV parsing for Wells Fargo, AmEx, standard formats
+- [ ] Add `transactions: Transaction[]` to AnalysisResult type
+- [ ] Create sample transactions in mock data
+- [ ] Build transaction detail modal component
+- [ ] Build category recategorization UI
+- [ ] Wire up modal to CategoryBreakdown (double-click handler)
+- [ ] Persist category changes to localStorage
+- [ ] Test with real CSV files
+- [ ] Fix any responsive/mobile issues
 
-- [ ] Create Figma mockups (Week 1)
-- [ ] Create React + Vite project (Week 1)
-- [ ] Build components (Week 2)
-- [ ] Port agents to JavaScript (Week 3)
-- [ ] Deploy and test (Week 4)
+### Session 4 Checklist:
+
+- [ ] Setup Vercel account and project
+- [ ] Configure custom domain (pennyPincher.app)
+- [ ] Run npm run build and test production build
+- [ ] Test on iPhone, iPad, Android, various browsers
+- [ ] Lighthouse audit (target >90)
+- [ ] Fix any critical issues
+- [ ] Deploy to production
+- [ ] Share with beta testers
 
 ---
 
@@ -399,11 +478,45 @@ When you're ready to build Phase 2:
 
 ---
 
-**Status:** Phase 1 Complete ✅ | Phase 2 Ready to Start 🚀
+**Status:** Phase 1 Complete ✅ | Phase 2 Sessions 1-2 Complete ✅ | Session 3 Ready to Start 🚀
 
 **Last updated:** May 3, 2026
-**Next phase estimated start:** When you're ready
+**Sessions completed:** 2 of 4
+**Next session:** Session 3 (Analysis logic & transaction details)
+**Dev server:** Running at http://localhost:5173
+**Repository:** Committed with Session 2 dashboard UI
 
 ---
 
-*Everything is documented. Everything is saved. You can pick this up anytime and continue.*
+## 📁 Current Web App Structure
+
+```
+web-app/
+├── src/
+│   ├── types/index.ts                    # All TypeScript interfaces
+│   ├── lib/storage.ts                    # localStorage helpers
+│   ├── data/mockAnalysis.ts              # Mock analysis (real data)
+│   ├── App.tsx                           # Main app + multi-file state
+│   ├── components/
+│   │   ├── UploadComponent.tsx           # Drag & drop upload UI
+│   │   └── dashboard/
+│   │       ├── DashboardShell.tsx        # Layout + navigation
+│   │       ├── SummaryCards.tsx          # 4 metric cards
+│   │       ├── CategoryBreakdown.tsx     # Spending bars
+│   │       ├── TopMerchants.tsx          # Merchant list
+│   │       ├── InsightsList.tsx          # Insights
+│   │       ├── AnomaliesList.tsx         # Flagged transactions
+│   │       └── FileHistoryPanel.tsx      # File sidebar
+│   ├── index.css                         # Tailwind imports
+│   └── main.tsx                          # React entry point
+├── index.html                            # Title updated to "PennyPincher"
+├── package.json                          # Dependencies
+├── tailwind.config.js                    # Tailwind setup
+├── tsconfig.json                         # TypeScript config
+├── vite.config.ts                        # Vite config
+└── dist/                                 # Production build
+```
+
+---
+
+*Everything is documented. Everything is saved. Sessions 1-2 are locked. Pick up Session 3 anytime.*
