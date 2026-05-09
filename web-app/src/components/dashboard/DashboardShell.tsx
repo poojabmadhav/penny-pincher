@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { FileRecord } from '@/types'
+import type { MonthlyConsolidation } from '@/lib/consolidation'
 import FileHistoryPanel from './FileHistoryPanel'
 import SummaryCards from './SummaryCards'
 import CategoryBreakdown from './CategoryBreakdown'
@@ -8,26 +9,26 @@ import InsightsList from './InsightsList'
 import AnomaliesList from './AnomaliesList'
 
 interface DashboardShellProps {
-  record: FileRecord
+  consolidation: MonthlyConsolidation
+  consolidations: MonthlyConsolidation[]
   fileHistory: FileRecord[]
   onUploadAnother: () => void
-  onSelectRecord: (id: string) => void
-  onDeleteRecord: (id: string) => void
+  onSelectMonth: (month: string) => void
+  onDeleteFile: (fileId: string) => void
 }
 
 export default function DashboardShell({
-  record,
+  consolidation,
+  consolidations,
   fileHistory,
   onUploadAnother,
-  onSelectRecord,
-  onDeleteRecord,
+  onSelectMonth,
+  onDeleteFile,
 }: DashboardShellProps) {
   const [categoryOverrides, setCategoryOverrides] = useState<Record<number, string>>({})
 
-  if (!record.analysisResult) return null
-
-  const result = record.analysisResult
-  const showSidebar = fileHistory.length >= 2
+  const result = consolidation.analysisResult
+  const showSidebar = consolidations.length >= 2
 
   const handleCategoryChange = (transactionIndex: number, newCategory: string) => {
     setCategoryOverrides({ ...categoryOverrides, [transactionIndex]: newCategory })
@@ -38,10 +39,11 @@ export default function DashboardShell({
     <div className="flex">
       {showSidebar && (
         <FileHistoryPanel
-          history={fileHistory}
-          activeId={record.id}
-          onSelect={onSelectRecord}
-          onDelete={onDeleteRecord}
+          consolidations={consolidations}
+          activeMonth={consolidation.month}
+          fileHistory={fileHistory}
+          onSelectMonth={onSelectMonth}
+          onDeleteFile={onDeleteFile}
         />
       )}
 
@@ -52,8 +54,8 @@ export default function DashboardShell({
             <div className="flex items-center gap-4 min-w-0">
               <h1 className="text-2xl font-bold shrink-0">PennyPincher</h1>
               <div className="border-l border-purple-600 pl-4 min-w-0">
-                <p className="text-sm text-purple-100 truncate">{record.fileName}</p>
-                <p className="text-xs text-purple-200 capitalize">{record.accountType} Account</p>
+                <p className="text-sm text-purple-100 truncate">{consolidation.monthLabel}</p>
+                <p className="text-xs text-purple-200">{consolidation.fileCount} file(s)</p>
               </div>
             </div>
             <button

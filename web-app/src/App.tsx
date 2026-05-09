@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import type { FileRecord, AppView, AccountType, AnalysisResult } from '@/types'
 import './App.css'
 import UploadComponent from '@/components/UploadComponent'
@@ -6,18 +6,25 @@ import DashboardShell from '@/components/dashboard/DashboardShell'
 import { loadHistory, saveHistory } from '@/lib/storage'
 import { generateId } from '@/lib/format'
 import { parseCSV } from '@/lib/csvParser'
+import { consolidateByMonth } from '@/lib/consolidation'
 import { MOCK_ANALYSIS_RESULT } from '@/data/mockAnalysis'
 
 function App() {
   const [fileHistory, setFileHistory] = useState<FileRecord[]>(() => loadHistory())
-  const [activeRecordId, setActiveRecordId] = useState<string | null>(
-    () => fileHistory[0]?.id ?? null,
-  )
+  const [activeMonth, setActiveMonth] = useState<string | null>(null)
   const [view, setView] = useState<AppView>(() =>
     fileHistory.length > 0 ? 'dashboard' : 'upload',
   )
 
-  const activeRecord = fileHistory.find((r) => r.id === activeRecordId)
+  const consolidations = useMemo(() => consolidateByMonth(fileHistory), [fileHistory])
+  const activeConsolidation = activeMonth ? consolidations.find((c) => c.month === activeMonth) : consolidations[0]
+
+  // Set active month when consolidations change
+  useEffect(() => {
+    if (!activeMonth && consolidations.length > 0) {
+      setActiveMonth(consolidations[0].month)
+    }
+  }, [consolidations, activeMonth])
 
   const handleFileUpload = async (file: File, accountType: AccountType) => {
     try {
@@ -41,7 +48,6 @@ function App() {
       }
       const updated = [newRecord, ...fileHistory]
       setFileHistory(updated)
-      setActiveRecordId(id)
       setView('dashboard')
       saveHistory(updated)
     } catch (error) {
@@ -57,7 +63,6 @@ function App() {
       }
       const updated = [newRecord, ...fileHistory]
       setFileHistory(updated)
-      setActiveRecordId(id)
       setView('dashboard')
       saveHistory(updated)
     }
@@ -67,22 +72,21 @@ function App() {
     setView('upload')
   }
 
-  const handleSelectRecord = (id: string) => {
-    setActiveRecordId(id)
+  const handleSelectMonth = (month: string) => {
+    setActiveMonth(month)
     setView('dashboard')
   }
 
-  const handleDeleteRecord = (id: string) => {
-    const updated = fileHistory.filter((r) => r.id !== id)
+  const handleDeleteFile = (fileId: string) => {
+    const updated = fileHistory.filter((r) => r.id !== fileId)
     setFileHistory(updated)
     saveHistory(updated)
-    if (id === activeRecordId) {
-      if (updated.length > 0) {
-        setActiveRecordId(updated[0].id)
-      } else {
-        setActiveRecordId(null)
-        setView('upload')
-      }
+    const newConsolidations = consolidateByMonth(updated)
+    if (newConsolidations.length === 0) {
+      setActiveMonth(null)
+      setView('upload')
+    } else if (!newConsolidations.find((c) => c.month === activeMonth)) {
+      setActiveMonth(newConsolidations[0].month)
     }
   }
 
@@ -91,13 +95,14 @@ function App() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {view === 'upload' ? (
           <UploadComponent onUpload={handleFileUpload} />
-        ) : activeRecord ? (
+        ) : activeConsolidation ? (
           <DashboardShell
-            record={activeRecord}
+            consolidation={activeConsolidation}
+            consolidations={consolidations}
             fileHistory={fileHistory}
             onUploadAnother={handleUploadAnother}
-            onSelectRecord={handleSelectRecord}
-            onDeleteRecord={handleDeleteRecord}
+            onSelectMonth={handleSelectMonth}
+            onDeleteFile={handleDeleteFile}
           />
         ) : null}
       </div>
