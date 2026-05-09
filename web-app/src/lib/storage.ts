@@ -1,4 +1,4 @@
-import type { FileRecord } from '../types'
+import type { FileRecord } from '@/types'
 
 const STORAGE_KEY = 'pennypincher_history'
 const MAX_RECORDS = 20

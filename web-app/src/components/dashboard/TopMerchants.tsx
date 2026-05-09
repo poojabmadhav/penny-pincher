@@ -1,17 +1,11 @@
-import type { AnalysisResult } from '../../types'
+import type { AnalysisResult } from '@/types'
+import { formatCurrency } from '@/lib/format'
 
 interface TopMerchantsProps {
   topMerchants: AnalysisResult['top_merchants']
 }
 
 export default function TopMerchants({ topMerchants }: TopMerchantsProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(Math.abs(amount))
-  }
-
   const displayed = topMerchants.slice(0, 5)
 
   return (
@@ -32,7 +26,7 @@ export default function TopMerchants({ topMerchants }: TopMerchantsProps) {
                 <p className="font-medium text-gray-800 text-sm truncate max-w-[140px]">
                   {merchant.merchant}
                 </p>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-gray-500">
                   {merchant.count} transaction{merchant.count !== 1 ? 's' : ''}
                 </p>
               </div>

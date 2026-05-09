@@ -1,4 +1,5 @@
-import type { AnalysisResult, AccountType } from '../../types'
+import type { AnalysisResult, AccountType } from '@/types'
+import { formatCurrency, formatDateRange } from '@/lib/format'
 
 interface SummaryCardsProps {
   summary: AnalysisResult['summary']
@@ -15,24 +16,6 @@ export default function SummaryCards({
     .sort((a, b) => Math.abs(b[1].total) - Math.abs(a[1].total))
     .at(0)?.[0]
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(Math.abs(amount))
-  }
-
-  const formatDate = (dateStr: string) => {
-    const parts = dateStr.split(' to ')
-    if (parts.length !== 2) return dateStr
-    const [start, end] = parts
-    const startDate = new Date(start)
-    const endDate = new Date(end)
-    const startMonth = startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-    const endMonth = endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-    return `${startMonth} – ${endMonth}`
-  }
-
   const cards = [
     {
       label: 'Total Spent',
@@ -48,7 +31,7 @@ export default function SummaryCards({
     },
     {
       label: 'Date Range',
-      value: formatDate(summary.date_range),
+      value: formatDateRange(summary.date_range),
       subtext: `${summary.transaction_count} transactions`,
       color: 'text-gray-600',
     },
@@ -71,7 +54,7 @@ export default function SummaryCards({
         >
           <p className="text-sm text-gray-500 font-medium">{card.label}</p>
           <p className={`text-2xl font-bold ${card.color} mt-2`}>{card.value}</p>
-          <p className="text-xs text-gray-400 mt-1">{card.subtext}</p>
+          <p className="text-xs text-gray-500 mt-1">{card.subtext}</p>
         </div>
       ))}
     </div>

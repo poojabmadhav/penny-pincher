@@ -1,28 +1,44 @@
 import { useRef, useState } from 'react'
+import type { AccountType } from '@/types'
 
 interface UploadComponentProps {
-  onUpload: (file: File, accountType: 'personal' | 'business') => void
+  onUpload: (file: File, accountType: AccountType) => Promise<void>
 }
 
 export default function UploadComponent({ onUpload }: UploadComponentProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const dragCounter = useRef(0)
   const [dragActive, setDragActive] = useState(false)
-  const [selectedType, setSelectedType] = useState<'personal' | 'business'>('personal')
+  const [selectedType, setSelectedType] = useState<AccountType>('personal')
   const [fileName, setFileName] = useState<string>('')
+  const [error, setError] = useState<string>('')
 
-  const handleDrag = (e: React.DragEvent) => {
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     e.stopPropagation()
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setDragActive(true)
-    } else if (e.type === 'dragleave') {
+    dragCounter.current += 1
+    setDragActive(true)
+  }
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    dragCounter.current -= 1
+    if (dragCounter.current <= 0) {
+      dragCounter.current = 0
       setDragActive(false)
     }
   }
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     e.stopPropagation()
+  }
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    dragCounter.current = 0
     setDragActive(false)
 
     const files = e.dataTransfer.files
@@ -38,13 +54,16 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
   }
 
   const handleFile = (file: File) => {
-    if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+    if (file.type === 'text/csv' || file.name.toLowerCase().endsWith('.csv')) {
+      setError('')
       setFileName(file.name)
       onUpload(file, selectedType)
     } else {
-      alert('Please upload a CSV file')
+      setError('That file is not a CSV. Please choose a .csv export from your bank.')
     }
   }
+
+  const openFilePicker = () => fileInputRef.current?.click()
 
   return (
     <div className="py-12 md:py-24">
@@ -86,20 +105,30 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
 
         {/* Drag and Drop Area */}
         <div
-          onDragEnter={handleDrag}
-          onDragLeave={handleDrag}
-          onDragOver={handleDrag}
+          role="button"
+          tabIndex={0}
+          aria-label="Upload CSV file"
+          onClick={openFilePicker}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              openFilePicker()
+            }
+          }}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDragOver={handleDragOver}
           onDrop={handleDrop}
-          className={`relative rounded-2xl border-2 border-dashed transition-all p-12 text-center cursor-pointer ${
+          className={`relative rounded-2xl border-2 border-dashed transition-all p-12 text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
             dragActive
-              ? 'border-purple-500 bg-purple-50 scale-105'
+              ? 'border-purple-500 bg-purple-50'
               : 'border-gray-300 bg-white hover:border-purple-400 hover:bg-purple-50'
           }`}
         >
           <input
             ref={fileInputRef}
             type="file"
-            accept=".csv"
+            accept=".csv,text/csv"
             onChange={handleChange}
             className="hidden"
           />
@@ -111,6 +140,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -143,12 +173,25 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
           )}
 
           <button
-            onClick={() => fileInputRef.current?.click()}
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              openFilePicker()
+            }}
             className="mt-6 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
           >
             {fileName ? 'Choose Different File' : 'Select File'}
           </button>
         </div>
+
+        {error && (
+          <div
+            role="alert"
+            className="mt-4 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700"
+          >
+            {error}
+          </div>
+        )}
 
         {/* Info Section */}
         <div className="mt-12 grid md:grid-cols-3 gap-8">

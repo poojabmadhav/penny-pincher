@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import type { AnalysisResult } from '../../types'
+import type { AnalysisResult } from '@/types'
+import { formatCurrency, formatShortDateWithYear } from '@/lib/format'
 
 interface AnomaliesListProps {
   anomalies: AnalysisResult['anomalies']
@@ -7,19 +8,6 @@ interface AnomaliesListProps {
 
 export default function AnomaliesList({ anomalies }: AnomaliesListProps) {
   const [showAll, setShowAll] = useState(false)
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(Math.abs(amount))
-  }
-
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr)
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
-  }
-
   const displayed = showAll ? anomalies : anomalies.slice(0, 5)
 
   if (anomalies.length === 0) {
@@ -42,8 +30,11 @@ export default function AnomaliesList({ anomalies }: AnomaliesListProps) {
 
       <div className="space-y-3">
         {displayed.map((anomaly, index) => (
-          <div key={index} className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg">
-            <span className="text-amber-500 mt-0.5 shrink-0">⚠</span>
+          <div
+            key={`${anomaly.date}-${anomaly.merchant}-${index}`}
+            className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg"
+          >
+            <span className="text-amber-500 mt-0.5 shrink-0" aria-hidden="true">⚠</span>
             <div className="flex-1">
               <div className="flex justify-between items-start">
                 <p className="font-medium text-sm text-gray-800">{anomaly.merchant}</p>
@@ -51,7 +42,9 @@ export default function AnomaliesList({ anomalies }: AnomaliesListProps) {
                   {formatCurrency(anomaly.amount)}
                 </p>
               </div>
-              <p className="text-xs text-gray-500">{formatDate(anomaly.date)} · {anomaly.category}</p>
+              <p className="text-xs text-gray-500">
+                {formatShortDateWithYear(anomaly.date)} · {anomaly.category}
+              </p>
               <p className="text-xs text-amber-700 mt-1">{anomaly.reason}</p>
             </div>
           </div>

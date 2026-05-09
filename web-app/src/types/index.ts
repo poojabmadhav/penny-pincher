@@ -21,7 +21,6 @@ export interface MerchantData {
 export interface CategoryData {
   total: number
   count: number
-  percentage: number
   average_transaction: number
   trend: Trend
   top_merchants: MerchantData[]
@@ -34,7 +33,6 @@ export interface AnalysisResult {
     total_spent: number
     transaction_count: number
     date_range: string
-    account_type: AccountType
     average_transaction: number
   }
   by_category: Record<string, CategoryData>
@@ -52,6 +50,7 @@ export interface AnalysisResult {
     total: number
     count: number
   }>
+  transactions: Transaction[]
 }
 
 export interface FileRecord {
