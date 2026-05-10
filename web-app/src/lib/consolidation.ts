@@ -1,5 +1,5 @@
 import type { FileRecord, AnalysisResult, Transaction, CategoryData, Trend, Insight } from '@/types'
-import { isSpendingCategory } from '@/lib/categorizer'
+import { categorize, isSpendingCategory } from '@/lib/categorizer'
 
 export interface MonthlyConsolidation {
   month: string // YYYY-MM format
@@ -37,20 +37,27 @@ function getTrend(transactions: Transaction[]): Trend {
 
 export function consolidateByMonth(fileHistory: FileRecord[]): MonthlyConsolidation[] {
   const monthMap = new Map<string, { files: FileRecord[], transactions: Transaction[] }>()
+  // Deduplicate across files: same date + merchant + amount = same transaction
+  const seen = new Set<string>()
 
-  // Group by month
   fileHistory.forEach((record) => {
     if (!record.analysisResult) return
 
-    record.analysisResult.transactions?.forEach((tx) => {
+    record.analysisResult.transactions?.forEach((rawTx) => {
+      const dedupeKey = `${rawTx.date}|${rawTx.merchant}|${rawTx.amount}`
+      if (seen.has(dedupeKey)) return
+      seen.add(dedupeKey)
+
+      // Always re-apply categorizer so new rules retroactively fix old data
+      const freshCategory = categorize(rawTx.merchant, rawTx.description, record.accountType)
+      const tx: Transaction = { ...rawTx, original_category: freshCategory, user_category: freshCategory }
+
       const monthKey = getMonthKey(tx.date)
       if (!monthMap.has(monthKey)) {
         monthMap.set(monthKey, { files: [], transactions: [] })
       }
       const entry = monthMap.get(monthKey)!
-      if (!entry.files.includes(record)) {
-        entry.files.push(record)
-      }
+      if (!entry.files.includes(record)) entry.files.push(record)
       entry.transactions.push(tx)
     })
   })
@@ -179,11 +186,21 @@ function generateInsights(transactions: Transaction[], byCategory: Record<string
 
   if (spend.length === 0) return insights
 
+  // Normalize merchant name: strip long numeric IDs and trailing person names
+  function normalizeMerchant(name: string): string {
+    return name
+      .replace(/\s+\d{6,}\s*/g, ' ') // remove transaction IDs (6+ digits)
+      .replace(/\s+[A-Z]{2,}(\s+[A-Z]{2,})+\s*$/g, '') // remove trailing ALL-CAPS names
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase()
+  }
+
   // --- Recurring charges: same merchant 2+ times with consistent amounts ---
   const merchantGroups = new Map<string, { amounts: number[]; displayName: string }>()
   spend.forEach((tx) => {
-    const key = tx.merchant.toLowerCase().trim()
-    if (!merchantGroups.has(key)) merchantGroups.set(key, { amounts: [], displayName: tx.merchant })
+    const key = normalizeMerchant(tx.merchant)
+    if (!merchantGroups.has(key)) merchantGroups.set(key, { amounts: [], displayName: normalizeMerchant(tx.merchant).replace(/\b\w/g, c => c.toUpperCase()) })
     merchantGroups.get(key)!.amounts.push(Math.abs(tx.amount))
   })
 

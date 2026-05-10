@@ -4,13 +4,24 @@ type RuleSet = [RegExp, string][]
 
 // Transfer/income rules run FIRST — bank transfers, payroll, autopay must not be miscategorized
 const TRANSFER_RULES: RuleSet = [
+  // Checks — always a transfer/payment, not a purchase
+  [/^check\s*#?\s*\d+/i, 'Transfer'],
+  // Wire transfers
   [/wire\s*trans|wt\s*fed|ach\s*transfer|online\s*transfer|transfer\s*(to|from|out|in)/i, 'Transfer'],
+  // Credit card / bank payments
   [/americanexpress\s*transfer|amex\s*payment|american\s*express\s*transfer/i, 'Transfer'],
   [/autopay\s*payment|bill\s*pay|auto\s*pay|e-?payment|epayment/i, 'Transfer'],
   [/citi\s*autopay|chase\s*autopay|bofa\s*autopay|bank\s*of\s*america\s*autopay/i, 'Transfer'],
+  // Mortgage & loan payments
+  [/home\s*mtg|home\s*mortgage|mortgage\s*pmt|wf\s*home|hm\s*mtg/i, 'Transfer'],
+  [/loan\s*pmt|loan\s*payment|auto\s*loan|student\s*loan/i, 'Transfer'],
+  // Bank / investment transfers
   [/community\s*federal|coastal\s*community|capital\s*corp|regalis/i, 'Transfer'],
-  [/payroll|direct\s*dep|slalom|w2\s*payment|salary|wages/i, 'Transfer'],
-  [/zelle|cashapp|cash\s*app/i, 'Transfer'],
+  [/schwab|fidelity|vanguard|e\*?trade|robinhood|merrill|td\s*ameritrade/i, 'Transfer'],
+  // Payroll & income
+  [/payroll|direct\s*dep|slalom\b|w2\s*payment|salary|wages/i, 'Transfer'],
+  // Peer payments
+  [/venmo\s*payment|^venmo\b|zelle|cashapp|cash\s*app/i, 'Transfer'],
 ]
 
 const PERSONAL_RULES: RuleSet = [
