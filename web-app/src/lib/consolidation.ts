@@ -1,4 +1,4 @@
-import type { FileRecord, AnalysisResult, Transaction, CategoryData, Trend } from '@/types'
+import type { FileRecord, AnalysisResult, Transaction, CategoryData, Trend, Insight } from '@/types'
 
 export interface MonthlyConsolidation {
   month: string // YYYY-MM format
@@ -154,24 +154,90 @@ export function consolidateByMonth(fileHistory: FileRecord[]): MonthlyConsolidat
   })
 }
 
-function generateInsights(transactions: Transaction[], byCategory: Record<string, CategoryData>): string[] {
-  const insights: string[] = []
+function fmt(amount: number): string {
+  return `$${Math.abs(amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+}
 
-  // Top spending category
-  const topCategory = Object.entries(byCategory).sort((a, b) => Math.abs(b[1].total) - Math.abs(a[1].total))[0]
-  if (topCategory) {
-    const pct = ((Math.abs(topCategory[1].total) / Math.abs(Object.values(byCategory).reduce((sum, c) => sum + c.total, 0))) * 100).toFixed(0)
-    insights.push(`Top spending category: ${topCategory[0]} (${pct}%)`)
+function isAmazon(merchant: string): boolean {
+  return /amazon|amz\b/i.test(merchant)
+}
+
+function generateInsights(transactions: Transaction[], byCategory: Record<string, CategoryData>): Insight[] {
+  const insights: Insight[] = []
+
+  // Detect sign convention: Wells Fargo uses negative for debits, AmEx uses positive
+  // Use all non-zero transactions for spend analysis
+  const spend = transactions.filter((t) => t.amount !== 0)
+  const totalSpend = spend.reduce((s, t) => s + Math.abs(t.amount), 0)
+
+  if (spend.length === 0) return insights
+
+  // --- Recurring charges: same merchant 2+ times with consistent amounts ---
+  const merchantGroups = new Map<string, { amounts: number[]; displayName: string }>()
+  spend.forEach((tx) => {
+    const key = tx.merchant.toLowerCase().trim()
+    if (!merchantGroups.has(key)) merchantGroups.set(key, { amounts: [], displayName: tx.merchant })
+    merchantGroups.get(key)!.amounts.push(Math.abs(tx.amount))
+  })
+
+  merchantGroups.forEach(({ amounts, displayName }) => {
+    if (amounts.length < 2) return
+    const avg = amounts.reduce((s, a) => s + a, 0) / amounts.length
+    if (avg < 1) return // skip tiny amounts
+    const allClose = amounts.every((a) => Math.abs(a - avg) / avg < 0.15)
+    if (allClose) {
+      insights.push({
+        type: 'recurring',
+        message: `Recurring charge: ${displayName}`,
+        detail: `Charged ${amounts.length}× this month — ${fmt(avg)} each`,
+        amount: -(avg * amounts.length),
+      })
+    }
+  })
+
+  // --- Category spike: any named category over 40% of total (skip Uncategorized) ---
+  Object.entries(byCategory)
+    .filter(([category, data]) => category !== 'Uncategorized' && Math.abs(data.total) / totalSpend > 0.4)
+    .sort((a, b) => Math.abs(b[1].total) - Math.abs(a[1].total))
+    .slice(0, 2)
+    .forEach(([category, data]) => {
+      const pct = Math.round((Math.abs(data.total) / totalSpend) * 100)
+      insights.push({
+        type: 'category_spike',
+        message: `${category} is ${pct}% of your spending this month`,
+        detail: `${data.count} transaction${data.count !== 1 ? 's' : ''} totalling ${fmt(data.total)}`,
+        amount: data.total,
+      })
+    })
+
+  // --- Unusual charges: a single charge > 3× that merchant's own average ---
+  merchantGroups.forEach(({ amounts, displayName }) => {
+    if (amounts.length < 2) return
+    const avg = amounts.reduce((s, a) => s + a, 0) / amounts.length
+    amounts.forEach((amount) => {
+      if (amount > avg * 3) {
+        insights.push({
+          type: 'unusual',
+          message: `Unusual charge at ${displayName}`,
+          detail: `${fmt(amount)} — over 3× your typical ${fmt(avg)} there`,
+          amount: -amount,
+        })
+      }
+    })
+  })
+
+  // --- Amazon tracker ---
+  const amazonTxs = spend.filter((tx) => isAmazon(tx.merchant))
+  if (amazonTxs.length > 0) {
+    const amazonTotal = amazonTxs.reduce((s, t) => s + Math.abs(t.amount), 0)
+    const pct = Math.round((amazonTotal / totalSpend) * 100)
+    insights.push({
+      type: 'amazon',
+      message: `Amazon: ${amazonTxs.length} order${amazonTxs.length !== 1 ? 's' : ''} totalling ${fmt(amazonTotal)}`,
+      detail: `${pct}% of your total spend this month`,
+      amount: -amazonTotal,
+    })
   }
-
-  // Transaction count
-  insights.push(`Total transactions: ${transactions.length}`)
-
-  // Average transaction
-  const avgTx = Object.values(byCategory).reduce((sum, c) => sum + c.count, 0) > 0
-    ? Math.abs(Object.values(byCategory).reduce((sum, c) => sum + c.total, 0)) / Object.values(byCategory).reduce((sum, c) => sum + c.count, 0)
-    : 0
-  insights.push(`Average transaction: $${avgTx.toFixed(2)}`)
 
   return insights
 }

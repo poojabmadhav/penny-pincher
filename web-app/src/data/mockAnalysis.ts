@@ -147,12 +147,7 @@ export const MOCK_ANALYSIS_RESULT: AnalysisResult = {
       ],
     },
   },
-  insights: [
-    'Highest spending category: Travel ($6094.59)',
-    'Recurring merchants account for $358.08 across 2 merchants',
-    'Total inflow: $178.00',
-    'Total outflow: $8606.06',
-  ],
+  insights: [],
   anomalies: [
     {
       date: '2024-08-30',

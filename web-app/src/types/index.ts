@@ -1,4 +1,13 @@
 export type AccountType = 'personal' | 'business'
+
+export type InsightType = 'recurring' | 'category_spike' | 'unusual' | 'amazon' | 'info'
+
+export interface Insight {
+  type: InsightType
+  message: string
+  detail?: string
+  amount?: number
+}
 export type AppView = 'upload' | 'dashboard'
 export type Trend = 'up' | 'down' | 'stable' | 'insufficient_data'
 
@@ -36,7 +45,7 @@ export interface AnalysisResult {
     average_transaction: number
   }
   by_category: Record<string, CategoryData>
-  insights: string[]
+  insights: Insight[]
   anomalies: Array<{
     date: string
     merchant: string

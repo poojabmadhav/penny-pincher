@@ -1,6 +1,6 @@
 import type { FileRecord } from '@/types'
 
-const STORAGE_KEY = 'pennypincher_history'
+const STORAGE_KEY = 'pennypincher_v2'
 const MAX_RECORDS = 20
 
 export function loadHistory(): FileRecord[] {

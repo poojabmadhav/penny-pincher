@@ -1,4 +1,5 @@
-import type { Transaction } from '@/types'
+import type { Transaction, AccountType } from '@/types'
+import { categorize } from '@/lib/categorizer'
 
 export type BankFormat = 'wells_fargo' | 'amex' | 'generic'
 
@@ -167,7 +168,7 @@ function parseCSVString(csvContent: string): string[][] {
   })
 }
 
-export function parseCSV(csvContent: string): ParsedCSV {
+export function parseCSV(csvContent: string, accountType: AccountType = 'personal'): ParsedCSV {
   const rows = parseCSVString(csvContent)
 
   if (rows.length === 0) {
@@ -190,8 +191,13 @@ export function parseCSV(csvContent: string): ParsedCSV {
       break
   }
 
-  // Filter out invalid transactions
-  transactions = transactions.filter((t) => t.date && t.merchant && t.amount !== 0)
+  // Filter invalid, then categorize
+  transactions = transactions
+    .filter((t) => t.date && t.merchant && t.amount !== 0)
+    .map((t) => ({
+      ...t,
+      original_category: categorize(t.merchant, t.description, accountType),
+    }))
 
   return { format, transactions }
 }

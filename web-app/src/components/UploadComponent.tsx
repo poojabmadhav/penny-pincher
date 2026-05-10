@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import type { AccountType } from '@/types'
 
 interface UploadComponentProps {
-  onUpload: (file: File, accountType: AccountType) => Promise<void>
+  onUpload: (files: File[], accountType: AccountType) => Promise<void>
 }
 
 export default function UploadComponent({ onUpload }: UploadComponentProps) {
@@ -10,7 +10,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
   const dragCounter = useRef(0)
   const [dragActive, setDragActive] = useState(false)
   const [selectedType, setSelectedType] = useState<AccountType>('personal')
-  const [fileName, setFileName] = useState<string>('')
+  const [fileNames, setFileNames] = useState<string[]>([])
   const [error, setError] = useState<string>('')
 
   const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
@@ -40,27 +40,25 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
     e.stopPropagation()
     dragCounter.current = 0
     setDragActive(false)
-
-    const files = e.dataTransfer.files
-    if (files && files[0]) {
-      handleFile(files[0])
-    }
+    if (e.dataTransfer.files) handleFiles(Array.from(e.dataTransfer.files))
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      handleFile(e.target.files[0])
-    }
+    if (e.target.files) handleFiles(Array.from(e.target.files))
   }
 
-  const handleFile = (file: File) => {
-    if (file.type === 'text/csv' || file.name.toLowerCase().endsWith('.csv')) {
-      setError('')
-      setFileName(file.name)
-      onUpload(file, selectedType)
-    } else {
-      setError('That file is not a CSV. Please choose a .csv export from your bank.')
+  const handleFiles = (files: File[]) => {
+    const csvFiles = files.filter(
+      (f) => f.type === 'text/csv' || f.name.toLowerCase().endsWith('.csv'),
+    )
+    const rejected = files.length - csvFiles.length
+    if (csvFiles.length === 0) {
+      setError('No CSV files found. Please choose .csv exports from your bank.')
+      return
     }
+    setError(rejected > 0 ? `${rejected} non-CSV file(s) skipped.` : '')
+    setFileNames(csvFiles.map((f) => f.name))
+    onUpload(csvFiles, selectedType)
   }
 
   const openFilePicker = () => fileInputRef.current?.click()
@@ -129,6 +127,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
             ref={fileInputRef}
             type="file"
             accept=".csv,text/csv"
+            multiple
             onChange={handleChange}
             className="hidden"
           />
@@ -151,20 +150,20 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
             </svg>
           </div>
 
-          {fileName ? (
+          {fileNames.length > 0 ? (
             <div>
-              <p className="text-lg font-semibold text-gray-900 mb-1">
-                ✓ {fileName}
-              </p>
-              <p className="text-sm text-gray-600">Ready to analyze</p>
+              {fileNames.map((name) => (
+                <p key={name} className="text-sm font-semibold text-gray-900">✓ {name}</p>
+              ))}
+              <p className="text-sm text-gray-500 mt-1">Analyzing...</p>
             </div>
           ) : (
             <>
               <p className="text-lg font-semibold text-gray-900 mb-1">
-                Drag your CSV file here
+                Drag your CSV files here
               </p>
               <p className="text-sm text-gray-600 mb-4">
-                or click to select from your computer
+                Drop multiple files at once — they'll be grouped by month
               </p>
               <p className="text-xs text-gray-500">
                 Supports Wells Fargo, American Express, and standard CSV formats
@@ -180,7 +179,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
             }}
             className="mt-6 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
           >
-            {fileName ? 'Choose Different File' : 'Select File'}
+            {fileNames.length > 0 ? 'Add More Files' : 'Select Files'}
           </button>
         </div>
 
