@@ -27,8 +27,9 @@ function App() {
     }
   }, [consolidations, activeMonth])
 
-  const handleFilesUpload = async (files: File[], accountType: AccountType) => {
+  const handleFilesUpload = async (files: File[], accountType: AccountType, onError?: (msg: string) => void) => {
     let updated = [...fileHistory]
+    const failedFiles: string[] = []
     for (const file of files) {
       try {
         const csvContent = await file.text()
@@ -44,11 +45,14 @@ function App() {
           ...updated,
         ]
       } catch (error) {
-        console.error(`Error parsing ${file.name}:`, error)
+        failedFiles.push(`${file.name}: ${error instanceof Error ? error.message : 'Unknown error'}`)
       }
     }
     setFileHistory(updated)
     saveHistory(updated)
+    if (failedFiles.length > 0 && onError) {
+      onError(`Failed to upload ${failedFiles.length} file(s): ${failedFiles.join('; ')}`)
+    }
   }
 
   const handleUploadAnother = () => {

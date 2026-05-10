@@ -1,7 +1,7 @@
 import type { Transaction, AccountType } from '@/types'
 import { categorize } from '@/lib/categorizer'
 
-export type BankFormat = 'wells_fargo' | 'amex' | 'generic'
+export type BankFormat = 'wells_fargo' | 'amex' | 'generic' | 'credit_card'
 
 interface ParsedCSV {
   format: BankFormat
@@ -13,6 +13,11 @@ function detectFormat(rows: string[][]): BankFormat {
 
   const firstRow = rows[0]
   const headerStr = firstRow.join(',').toLowerCase()
+
+  // Credit card format: Status, Date, Description, Debit, Credit, Member Name
+  if (headerStr.includes('status') && headerStr.includes('debit') && headerStr.includes('credit')) {
+    return 'credit_card'
+  }
 
   // Check for headers first
   if (headerStr.includes('date') && headerStr.includes('amount')) {
@@ -88,6 +93,47 @@ function parseAmEx(rows: string[][]): Transaction[] {
         description,
         amount,
         source: 'American Express',
+        original_category: 'Uncategorized',
+      }
+    })
+}
+
+function parseCreditCard(rows: string[][]): Transaction[] {
+  if (rows.length < 2) return []
+
+  const headers = rows[0].map((h) => h.toLowerCase().trim())
+  const dateIdx = headers.findIndex((h) => h === 'date')
+  const descIdx = headers.findIndex((h) => h === 'description')
+  const debitIdx = headers.findIndex((h) => h === 'debit')
+  const creditIdx = headers.findIndex((h) => h === 'credit')
+
+  if (dateIdx === -1 || descIdx === -1 || debitIdx === -1 || creditIdx === -1) {
+    return []
+  }
+
+  return rows
+    .slice(1)
+    .filter((row) => row.length > Math.max(dateIdx, descIdx, debitIdx, creditIdx))
+    .map((row) => {
+      const date = row[dateIdx] || ''
+      const description = row[descIdx] || ''
+      const debitStr = row[debitIdx] || ''
+      const creditStr = row[creditIdx] || ''
+
+      // Debit is negative (money out), Credit is positive (money in)
+      let amount = 0
+      if (debitStr) {
+        amount = -(parseFloat(debitStr.replace(/[$,]/g, '')) || 0)
+      } else if (creditStr) {
+        amount = parseFloat(creditStr.replace(/[$,]/g, '')) || 0
+      }
+
+      return {
+        date,
+        merchant: description,
+        description,
+        amount,
+        source: 'Credit Card',
         original_category: 'Uncategorized',
       }
     })
@@ -185,6 +231,9 @@ export function parseCSV(csvContent: string, accountType: AccountType = 'persona
       break
     case 'amex':
       transactions = parseAmEx(rows)
+      break
+    case 'credit_card':
+      transactions = parseCreditCard(rows)
       break
     case 'generic':
       transactions = parseGeneric(rows)

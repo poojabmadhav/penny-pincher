@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import type { AccountType } from '@/types'
 
 interface UploadComponentProps {
-  onUpload: (files: File[], accountType: AccountType) => Promise<void>
+  onUpload: (files: File[], accountType: AccountType, onError?: (msg: string) => void) => Promise<void>
 }
 
 export default function UploadComponent({ onUpload }: UploadComponentProps) {
@@ -47,7 +47,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
     if (e.target.files) handleFiles(Array.from(e.target.files))
   }
 
-  const handleFiles = (files: File[]) => {
+  const handleFiles = async (files: File[]) => {
     const csvFiles = files.filter(
       (f) => f.type === 'text/csv' || f.name.toLowerCase().endsWith('.csv'),
     )
@@ -58,7 +58,13 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
     }
     setError(rejected > 0 ? `${rejected} non-CSV file(s) skipped.` : '')
     setFileNames(csvFiles.map((f) => f.name))
-    onUpload(csvFiles, selectedType)
+
+    await onUpload(csvFiles, selectedType, (errorMsg) => {
+      setError(errorMsg)
+      setFileNames([])
+    })
+
+    setFileNames([])
   }
 
   const openFilePicker = () => fileInputRef.current?.click()
@@ -166,7 +172,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
                 Drop multiple files at once — they'll be grouped by month
               </p>
               <p className="text-xs text-gray-500">
-                Supports Wells Fargo, American Express, and standard CSV formats
+                Supports Wells Fargo, American Express, credit card statements, and standard CSV
               </p>
             </>
           )}
