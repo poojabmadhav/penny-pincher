@@ -1,4 +1,5 @@
 import type { FileRecord, AnalysisResult, Transaction, CategoryData, Trend, Insight } from '@/types'
+import { isSpendingCategory } from '@/lib/categorizer'
 
 export interface MonthlyConsolidation {
   month: string // YYYY-MM format
@@ -59,13 +60,19 @@ export function consolidateByMonth(fileHistory: FileRecord[]): MonthlyConsolidat
     .sort((a, b) => b[0].localeCompare(a[0]))
 
   return sorted.map(([monthKey, { files, transactions }]) => {
-    const totalSpent = transactions.reduce((sum, tx) => sum + tx.amount, 0)
-    const avgTransaction = transactions.length > 0 ? totalSpent / transactions.length : 0
+    // Only count actual spending (exclude transfers, payroll, credits)
+    const spendingTxs = transactions.filter((tx) => {
+      const cat = tx.user_category || tx.original_category || 'Other'
+      return isSpendingCategory(cat)
+    })
 
-    // Build category breakdown
+    const totalSpent = spendingTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0)
+    const avgTransaction = spendingTxs.length > 0 ? totalSpent / spendingTxs.length : 0
+
+    // Build category breakdown — spending categories only
     const byCategory: Record<string, CategoryData> = {}
-    transactions.forEach((tx) => {
-      const category = tx.user_category || tx.original_category || 'Uncategorized'
+    spendingTxs.forEach((tx) => {
+      const category = tx.user_category || tx.original_category || 'Other'
       if (!byCategory[category]) {
         byCategory[category] = {
           total: 0,
@@ -75,7 +82,7 @@ export function consolidateByMonth(fileHistory: FileRecord[]): MonthlyConsolidat
           top_merchants: [],
         }
       }
-      byCategory[category].total += tx.amount
+      byCategory[category].total += Math.abs(tx.amount)
       byCategory[category].count += 1
     })
 
@@ -99,29 +106,29 @@ export function consolidateByMonth(fileHistory: FileRecord[]): MonthlyConsolidat
     })
 
     // Generate insights
-    const insights = generateInsights(transactions, byCategory)
+    const insights = generateInsights(spendingTxs, byCategory)
 
-    // Generate anomalies
-    const anomalies = generateAnomalies(transactions)
+    // Generate anomalies from spending only
+    const anomalies = generateAnomalies(spendingTxs)
 
-    // Top merchants overall
+    // Top merchants from spending transactions
     const merchantMap = new Map<string, { total: number; count: number }>()
-    transactions.forEach((tx) => {
+    spendingTxs.forEach((tx) => {
       if (!merchantMap.has(tx.merchant)) {
         merchantMap.set(tx.merchant, { total: 0, count: 0 })
       }
       const m = merchantMap.get(tx.merchant)!
-      m.total += tx.amount
+      m.total += Math.abs(tx.amount)
       m.count += 1
     })
     const topMerchants = Array.from(merchantMap.entries())
-      .sort((a, b) => Math.abs(b[1].total) - Math.abs(a[1].total))
+      .sort((a, b) => b[1].total - a[1].total)
       .slice(0, 5)
       .map(([merchant, { total, count }]) => ({ merchant, total, count }))
 
-    const dateRange = transactions.length > 0
+    const dateRange = spendingTxs.length > 0
       ? (() => {
-          const dates = transactions.map((tx) => new Date(tx.date).getTime()).sort((a, b) => a - b)
+          const dates = spendingTxs.map((tx) => new Date(tx.date).getTime()).sort((a, b) => a - b)
           const minDate = new Date(dates[0]).toLocaleDateString()
           const maxDate = new Date(dates[dates.length - 1]).toLocaleDateString()
           return `${minDate} to ${maxDate}`
@@ -133,7 +140,7 @@ export function consolidateByMonth(fileHistory: FileRecord[]): MonthlyConsolidat
       account_type: files[0]?.accountType || 'personal',
       summary: {
         total_spent: totalSpent,
-        transaction_count: transactions.length,
+        transaction_count: spendingTxs.length,
         date_range: dateRange,
         average_transaction: avgTransaction,
       },
