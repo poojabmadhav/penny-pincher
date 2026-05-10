@@ -4,13 +4,17 @@ type RuleSet = [RegExp, string][]
 
 // Transfer/income rules run FIRST — bank transfers, payroll, autopay must not be miscategorized
 const TRANSFER_RULES: RuleSet = [
+  // ATM & cash — money moving, not spending
+  [/atm\s*withdrawal|atm\s*deposit|cash\s*withdrawal|cash\s*advance|cash\s*deposit/i, 'Transfer'],
   // Checks — always a transfer/payment, not a purchase
   [/^check\s*#?\s*\d+/i, 'Transfer'],
-  // Wire transfers
+  // Wire transfers & ACH
   [/wire\s*trans|wt\s*fed|ach\s*transfer|online\s*transfer|transfer\s*(to|from|out|in)/i, 'Transfer'],
-  // Credit card / bank payments
+  // Credit card & bank online payments
   [/americanexpress\s*transfer|amex\s*payment|american\s*express\s*transfer/i, 'Transfer'],
-  [/autopay\s*payment|bill\s*pay|auto\s*pay|e-?payment|epayment/i, 'Transfer'],
+  [/citi\s*card\s*online|citi\s*online|chase\s*online|bofa\s*online|bank\s*of\s*america\s*online/i, 'Transfer'],
+  [/capital\s*one\s*online|discover\s*online|wells\s*fargo\s*online/i, 'Transfer'],
+  [/autopay\s*payment|bill\s*pay|auto\s*pay|e-?payment|epayment|card\s*payment\b|online\s*payment/i, 'Transfer'],
   [/citi\s*autopay|chase\s*autopay|bofa\s*autopay|bank\s*of\s*america\s*autopay/i, 'Transfer'],
   // Mortgage & loan payments
   [/home\s*mtg|home\s*mortgage|mortgage\s*pmt|wf\s*home|hm\s*mtg/i, 'Transfer'],
