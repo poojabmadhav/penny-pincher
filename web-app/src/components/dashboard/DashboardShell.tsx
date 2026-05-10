@@ -82,7 +82,7 @@ export default function DashboardShell({
               transactions={result.transactions}
               onCategoryChange={handleCategoryChange}
             />
-            <TopMerchants topMerchants={result.top_merchants} />
+            <TopMerchants topMerchants={result.top_merchants} transactions={result.transactions} />
           </div>
 
           <InsightsList insights={result.insights} />
