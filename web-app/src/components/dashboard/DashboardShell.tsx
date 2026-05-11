@@ -112,7 +112,7 @@ export default function DashboardShell({
   }
 
   return (
-    <div className="flex">
+    <div className="flex h-dvh md:h-auto overflow-hidden md:overflow-visible">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -137,7 +137,7 @@ export default function DashboardShell({
         />
       </div>
 
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 flex flex-col h-full md:h-auto overflow-hidden md:overflow-visible">
         {/* Header */}
         <header className="bg-brand-dark text-white px-4 md:px-6 py-3 md:py-4 sticky top-0 z-10 shadow-md">
           <div className="flex items-center gap-3">
@@ -152,7 +152,7 @@ export default function DashboardShell({
         </header>
 
         {/* Main Content — extra bottom padding on mobile for tab bar */}
-        <main className="p-3 md:p-6 pb-20 md:pb-6">
+        <main className="flex-1 overflow-y-auto p-3 md:p-6 pb-20 md:pb-6">
           {activeView === 'dashboard' ? (
             <DashboardView allTransactions={allTransactions} onUploadAnother={onUploadAnother} />
           ) : (
