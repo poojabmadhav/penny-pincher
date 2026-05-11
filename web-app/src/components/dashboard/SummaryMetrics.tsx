@@ -35,13 +35,13 @@ export default function SummaryMetrics({ cashFlow, transactionCount }: SummaryMe
   ]
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
       {cards.map((card) => (
-        <div key={card.label} className="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
-          <p className="text-xs font-semibold text-gray-400 tracking-widest uppercase">
+        <div key={card.label} className="bg-white rounded-xl shadow-sm p-3 md:p-5 border border-gray-100 min-w-0">
+          <p className="text-xs font-semibold text-gray-400 tracking-wider uppercase truncate">
             {card.label}
           </p>
-          <p className={`text-2xl font-bold mt-2 ${card.color}`}>
+          <p className={`text-base md:text-2xl font-bold mt-1 md:mt-2 truncate ${card.color}`}>
             {card.prefix}{card.value}
           </p>
         </div>
