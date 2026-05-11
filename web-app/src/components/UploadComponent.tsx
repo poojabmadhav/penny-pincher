@@ -9,7 +9,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dragCounter = useRef(0)
   const [dragActive, setDragActive] = useState(false)
-  const [selectedType, setSelectedType] = useState<AccountType>('personal')
+  const selectedType: AccountType = 'personal'
   const [fileNames, setFileNames] = useState<string[]>([])
   const [error, setError] = useState<string>('')
 
@@ -70,43 +70,23 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
   const openFilePicker = () => fileInputRef.current?.click()
 
   return (
-    <div className="py-12 md:py-24">
+    <div className="py-8 md:py-14">
       {/* Hero Section */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-8">
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
           PennyPincher
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           Understand your spending. Keep your privacy. No bank connections needed.
         </p>
+        <p className="text-sm text-brand-mid max-w-xl mx-auto mt-3 flex items-center justify-center gap-1.5">
+          <span>🔒</span>
+          Track where your pennies roll while your data stays on your device.
+        </p>
       </div>
 
       {/* Upload Area */}
       <div className="max-w-2xl mx-auto">
-        {/* Account Type Selector */}
-        <div className="mb-8 flex gap-4 justify-center">
-          <button
-            onClick={() => setSelectedType('personal')}
-            className={`px-6 py-3 rounded-full font-medium transition-all ${
-              selectedType === 'personal'
-                ? 'bg-brand-accent text-brand-dark shadow-lg'
-                : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-            }`}
-          >
-            Personal
-          </button>
-          <button
-            onClick={() => setSelectedType('business')}
-            className={`px-6 py-3 rounded-full font-medium transition-all ${
-              selectedType === 'business'
-                ? 'bg-brand-accent text-brand-dark shadow-lg'
-                : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-            }`}
-          >
-            Business
-          </button>
-        </div>
-
         {/* Drag and Drop Area */}
         <div
           role="button"
@@ -125,8 +105,8 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
           onDrop={handleDrop}
           className={`relative rounded-2xl border-2 border-dashed transition-all p-12 text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-mid focus:ring-offset-2 ${
             dragActive
-              ? 'border-brand-mid bg-brand-light'
-              : 'border-gray-300 bg-white hover:border-purple-400 hover:bg-brand-light'
+              ? 'border-brand-dark bg-brand-light'
+              : 'border-brand-mid bg-brand-light hover:border-brand-dark'
           }`}
         >
           <input
@@ -165,14 +145,11 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
             </div>
           ) : (
             <>
-              <p className="text-lg font-semibold text-gray-900 mb-1">
+              <p className="text-lg font-semibold text-gray-900 mb-3">
                 Drag your CSV files here
               </p>
-              <p className="text-sm text-gray-600 mb-4">
-                Drop multiple files at once — they'll be grouped by month
-              </p>
-              <p className="text-xs text-gray-500">
-                Supports Wells Fargo, American Express, credit card statements, and standard CSV
+              <p className="text-sm text-gray-600 max-w-md mx-auto">
+                Drag a .csv file of your financial transactions here for analysis. Data is all yours and not saved or uploaded anywhere beyond your device.
               </p>
             </>
           )}
@@ -183,7 +160,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
               e.stopPropagation()
               openFilePicker()
             }}
-            className="mt-6 px-6 py-2 bg-brand-accent text-brand-dark rounded-lg hover:bg-brand-dark transition-colors font-medium"
+            className="mt-6 px-6 py-2 bg-brand-accent text-brand-dark rounded-lg hover:bg-brand-mid hover:text-white transition-colors font-medium"
           >
             {fileNames.length > 0 ? 'Add More Files' : 'Select Files'}
           </button>
