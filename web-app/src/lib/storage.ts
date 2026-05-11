@@ -2,12 +2,15 @@ import type { FileRecord } from '@/types'
 
 const STORAGE_KEY = 'pennypincher_v2'
 const MAX_RECORDS = 20
+// File history uses sessionStorage — clears when tab/browser is closed.
+// Merchant rules and category overrides use localStorage so they persist across sessions.
+const historyStore = sessionStorage
 const OVERRIDES_KEY = 'pennypincher_cat_overrides'
 const MERCHANT_RULES_KEY = 'pennypincher_merchant_rules'
 
 export function loadHistory(): FileRecord[] {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
+    const stored = historyStore.getItem(STORAGE_KEY)
     if (!stored) return []
     const parsed = JSON.parse(stored) as FileRecord[]
     return Array.isArray(parsed) ? parsed : []
@@ -19,15 +22,15 @@ export function loadHistory(): FileRecord[] {
 export function saveHistory(records: FileRecord[]): void {
   try {
     const capped = records.slice(0, MAX_RECORDS)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(capped))
+    historyStore.setItem(STORAGE_KEY, JSON.stringify(capped))
   } catch {
-    console.error('Failed to save history to localStorage')
+    console.error('Failed to save history to sessionStorage')
   }
 }
 
 export function clearHistory(): void {
   try {
-    localStorage.removeItem(STORAGE_KEY)
+    historyStore.removeItem(STORAGE_KEY)
   } catch {
     console.error('Failed to clear history')
   }

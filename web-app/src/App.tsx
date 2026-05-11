@@ -7,6 +7,9 @@ import { loadHistory, saveHistory } from '@/lib/storage'
 import { generateId } from '@/lib/format'
 import { parseCSV } from '@/lib/csvParser'
 import { consolidateByMonth } from '@/lib/consolidation'
+
+type HistoryState = { appView: AppView }
+
 function App() {
   const [fileHistory, setFileHistory] = useState<FileRecord[]>(() => loadHistory())
   const [activeMonth, setActiveMonth] = useState<string | null>(null)
@@ -17,7 +20,26 @@ function App() {
     ? consolidations.find((c) => c.month === activeMonth)
     : consolidations[0]
 
-  // Switch to dashboard once we have consolidated data
+  // Set initial history state on first load
+  useEffect(() => {
+    history.replaceState({ appView: 'upload' } as HistoryState, '')
+  }, [])
+
+  // Handle browser back/forward
+  useEffect(() => {
+    const handlePop = (e: PopStateEvent) => {
+      const state = e.state as HistoryState | null
+      if (state?.appView === 'upload') {
+        setView('upload')
+      } else if (state?.appView === 'dashboard') {
+        setView('dashboard')
+      }
+    }
+    window.addEventListener('popstate', handlePop)
+    return () => window.removeEventListener('popstate', handlePop)
+  }, [])
+
+  // Switch to dashboard once we have data
   useEffect(() => {
     if (consolidations.length > 0) {
       if (!activeMonth) setActiveMonth(consolidations[0].month)
@@ -56,6 +78,7 @@ function App() {
   }
 
   const handleUploadAnother = () => {
+    history.pushState({ appView: 'upload' } as HistoryState, '')
     setView('upload')
   }
 
@@ -77,6 +100,13 @@ function App() {
     }
   }
 
+  // Push a dashboard history entry when transitioning from upload → dashboard
+  const handleDashboardReady = () => {
+    if (view === 'dashboard') {
+      history.pushState({ appView: 'dashboard' } as HistoryState, '')
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-light via-white to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,6 +120,7 @@ function App() {
             onUploadAnother={handleUploadAnother}
             onSelectMonth={handleSelectMonth}
             onDeleteFile={handleDeleteFile}
+            onDashboardReady={handleDashboardReady}
           />
         ) : null}
       </div>

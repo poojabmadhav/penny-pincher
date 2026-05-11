@@ -25,7 +25,7 @@ export default function FileHistoryPanel({
   const [expandedMonth, setExpandedMonth] = useState<string | null>(activeMonth)
 
   return (
-    <aside className="hidden md:block w-44 shrink-0 bg-white border-r border-gray-200 min-h-screen sticky top-0 overflow-y-auto">
+    <aside className="w-44 shrink-0 bg-white border-r border-gray-200 min-h-screen sticky top-0 overflow-y-auto">
 
       {/* Dashboard nav item */}
       <button

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import type { FileRecord, Transaction } from '@/types'
 import type { MonthlyConsolidation } from '@/lib/consolidation'
 import { recomputeResult } from '@/lib/consolidation'
@@ -18,7 +18,10 @@ interface DashboardShellProps {
   onUploadAnother: () => void
   onSelectMonth: (month: string) => void
   onDeleteFile: (fileId: string) => void
+  onDashboardReady: () => void
 }
+
+type DashHistoryState = { appView: 'dashboard'; dashView: 'dashboard' | 'month'; month?: string }
 
 function applyOverridesToTransactions(
   transactions: Transaction[],
@@ -39,9 +42,27 @@ export default function DashboardShell({
   onUploadAnother,
   onSelectMonth,
   onDeleteFile,
+  onDashboardReady,
 }: DashboardShellProps) {
   const [activeView, setActiveView] = useState<'dashboard' | 'month'>('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  // Push initial history entry when shell mounts (upload → dashboard transition)
+  useEffect(() => {
+    onDashboardReady()
+    // Handle back button within the dashboard
+    const handlePop = (e: PopStateEvent) => {
+      const state = e.state as DashHistoryState | null
+      if (state?.appView === 'dashboard') {
+        setActiveView(state.dashView ?? 'dashboard')
+        if (state.dashView === 'month' && state.month) onSelectMonth(state.month)
+      }
+      // appView === 'upload' is handled by App.tsx
+    }
+    window.addEventListener('popstate', handlePop)
+    return () => window.removeEventListener('popstate', handlePop)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const [categoryOverrides, setCategoryOverrides] = useState<Record<string, string>>(
     () => loadCategoryOverrides(),
   )
@@ -78,12 +99,14 @@ export default function DashboardShell({
   }
 
   const handleSelectMonth = (month: string) => {
+    history.pushState({ appView: 'dashboard', dashView: 'month', month } as DashHistoryState, '')
     setActiveView('month')
     setSidebarOpen(false)
     onSelectMonth(month)
   }
 
   const handleSelectDashboard = () => {
+    history.pushState({ appView: 'dashboard', dashView: 'dashboard' } as DashHistoryState, '')
     setActiveView('dashboard')
     setSidebarOpen(false)
   }
