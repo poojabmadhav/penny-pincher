@@ -55,17 +55,19 @@ export default function CategoryChart({ metrics }: CategoryChartProps) {
   return (
     <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">Spending by Category</h2>
-      <div className="flex items-start gap-6">
-        {/* Donut chart with center label overlay */}
-        <div className="flex-shrink-0 relative" style={{ width: 260, height: 260 }}>
+      {/* Mobile: stacked. Desktop: side by side */}
+      <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+        {/* Donut — smaller on mobile */}
+        <div className="flex-shrink-0 relative mx-auto md:mx-0"
+          style={{ width: 200, height: 200 }}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={data}
                 cx="50%"
                 cy="50%"
-                innerRadius={75}
-                outerRadius={118}
+                innerRadius={56}
+                outerRadius={90}
                 dataKey="value"
                 startAngle={90}
                 endAngle={-270}
@@ -79,10 +81,9 @@ export default function CategoryChart({ metrics }: CategoryChartProps) {
               <Tooltip content={<CustomTooltip />} />
             </PieChart>
           </ResponsiveContainer>
-          {/* Center label overlay */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="text-center">
-              <div className="text-base font-bold text-gray-900 leading-tight">
+              <div className="text-sm font-bold text-gray-900 leading-tight">
                 {formatCurrency(total)}
               </div>
               <div className="text-xs text-gray-400 mt-0.5">Total</div>
@@ -90,8 +91,8 @@ export default function CategoryChart({ metrics }: CategoryChartProps) {
           </div>
         </div>
 
-        {/* Legend — two columns so it doesn't get too tall */}
-        <div className="flex-1 grid grid-cols-2 gap-x-6 gap-y-2 content-start">
+        {/* Legend — 1 col on mobile, 2 col on desktop */}
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 content-start">
           {metrics.map((m, index) => (
             <div key={m.category} className="flex items-center justify-between gap-2 min-w-0">
               <div className="flex items-center gap-1.5 min-w-0 flex-1">

@@ -94,7 +94,7 @@ export default function MonthlyCharts({
   })()
 
   return (
-    <div className="grid md:grid-cols-2 gap-6 mb-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       {/* Spending Donut */}
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 flex flex-col items-center">
         <h2 className="text-base font-semibold text-gray-700 mb-1 self-start">
@@ -135,7 +135,7 @@ export default function MonthlyCharts({
         </div>
 
         {/* Compact legend below the donut */}
-        <div className="w-full mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5">
+        <div className="w-full mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5">
           {donutData.map((d, i) => (
             <div key={d.name} className="flex items-center gap-1.5 min-w-0">
               <span

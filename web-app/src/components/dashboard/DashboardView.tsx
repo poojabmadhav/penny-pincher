@@ -94,7 +94,7 @@ export default function DashboardView({ allTransactions, onUploadAnother }: Dash
     <div className="space-y-6">
 
       {/* ── Date range + actions dropdown ──────────────────────────────── */}
-      <div className="flex items-start gap-3">
+      <div className="flex flex-col sm:flex-row items-start gap-3">
         <div className="flex-1">
           <DateRangeSelector
             dateSelection={dateSelection}
@@ -110,7 +110,7 @@ export default function DashboardView({ allTransactions, onUploadAnother }: Dash
         </div>
 
         {/* Dropdown trigger */}
-        <div ref={menuRef} className="relative pt-[18px]">
+        <div ref={menuRef} className="relative sm:pt-[18px]">
           <button
             onClick={() => setMenuOpen((v) => !v)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm whitespace-nowrap"
