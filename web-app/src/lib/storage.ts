@@ -2,6 +2,8 @@ import type { FileRecord } from '@/types'
 
 const STORAGE_KEY = 'pennypincher_v2'
 const MAX_RECORDS = 20
+const OVERRIDES_KEY = 'pennypincher_cat_overrides'
+const MERCHANT_RULES_KEY = 'pennypincher_merchant_rules'
 
 export function loadHistory(): FileRecord[] {
   try {
@@ -29,4 +31,40 @@ export function clearHistory(): void {
   } catch {
     console.error('Failed to clear history')
   }
+}
+
+// Category overrides: stable per-transaction key "date|merchant|amount" → category
+export function loadCategoryOverrides(): Record<string, string> {
+  try {
+    const stored = localStorage.getItem(OVERRIDES_KEY)
+    return stored ? (JSON.parse(stored) as Record<string, string>) : {}
+  } catch {
+    return {}
+  }
+}
+
+export function saveCategoryOverride(key: string, category: string): void {
+  try {
+    const current = loadCategoryOverrides()
+    current[key] = category
+    localStorage.setItem(OVERRIDES_KEY, JSON.stringify(current))
+  } catch {}
+}
+
+// Merchant rules: normalised merchant name → preferred category (applied on next upload)
+export function loadMerchantRules(): Record<string, string> {
+  try {
+    const stored = localStorage.getItem(MERCHANT_RULES_KEY)
+    return stored ? (JSON.parse(stored) as Record<string, string>) : {}
+  } catch {
+    return {}
+  }
+}
+
+export function saveMerchantRule(merchant: string, category: string): void {
+  try {
+    const current = loadMerchantRules()
+    current[merchant.toLowerCase().trim()] = category
+    localStorage.setItem(MERCHANT_RULES_KEY, JSON.stringify(current))
+  } catch {}
 }

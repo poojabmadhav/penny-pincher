@@ -1,5 +1,6 @@
 import type { FileRecord, AnalysisResult, Transaction, CategoryData, Trend, Insight } from '@/types'
 import { categorize, isSpendingCategory } from '@/lib/categorizer'
+import { loadMerchantRules } from '@/lib/storage'
 
 export interface MonthlyConsolidation {
   month: string // YYYY-MM format
@@ -37,8 +38,9 @@ function getTrend(transactions: Transaction[]): Trend {
 
 export function consolidateByMonth(fileHistory: FileRecord[]): MonthlyConsolidation[] {
   const monthMap = new Map<string, { files: FileRecord[], transactions: Transaction[] }>()
-  // Deduplicate across files: same date + merchant + amount = same transaction
   const seen = new Set<string>()
+  // Check user's saved merchant rules first (takes priority over regex categorizer)
+  const merchantRules = loadMerchantRules()
 
   fileHistory.forEach((record) => {
     if (!record.analysisResult) return
@@ -48,8 +50,9 @@ export function consolidateByMonth(fileHistory: FileRecord[]): MonthlyConsolidat
       if (seen.has(dedupeKey)) return
       seen.add(dedupeKey)
 
-      // Always re-apply categorizer so new rules retroactively fix old data
-      const freshCategory = categorize(rawTx.merchant, rawTx.description, record.accountType)
+      const ruleKey = rawTx.merchant.toLowerCase().trim()
+      const freshCategory =
+        merchantRules[ruleKey] ?? categorize(rawTx.merchant, rawTx.description, record.accountType)
       const tx: Transaction = { ...rawTx, original_category: freshCategory, user_category: freshCategory }
 
       const monthKey = getMonthKey(tx.date)
@@ -204,7 +207,7 @@ function generateInsights(transactions: Transaction[], byCategory: Record<string
     merchantGroups.get(key)!.amounts.push(Math.abs(tx.amount))
   })
 
-  merchantGroups.forEach(({ amounts, displayName }) => {
+  merchantGroups.forEach(({ amounts, displayName }, normKey) => {
     if (amounts.length < 2) return
     const avg = amounts.reduce((s, a) => s + a, 0) / amounts.length
     if (avg < 1) return // skip tiny amounts
@@ -215,6 +218,7 @@ function generateInsights(transactions: Transaction[], byCategory: Record<string
         message: `Recurring charge: ${displayName}`,
         detail: `Charged ${amounts.length}× this month — ${fmt(avg)} each`,
         amount: -(avg * amounts.length),
+        filterMerchant: normKey,
       })
     }
   })
@@ -231,11 +235,12 @@ function generateInsights(transactions: Transaction[], byCategory: Record<string
         message: `${category} is ${pct}% of your spending this month`,
         detail: `${data.count} transaction${data.count !== 1 ? 's' : ''} totalling ${fmt(data.total)}`,
         amount: data.total,
+        filterCategory: category,
       })
     })
 
   // --- Unusual charges: a single charge > 3× that merchant's own average ---
-  merchantGroups.forEach(({ amounts, displayName }) => {
+  merchantGroups.forEach(({ amounts, displayName }, normKey) => {
     if (amounts.length < 2) return
     const avg = amounts.reduce((s, a) => s + a, 0) / amounts.length
     amounts.forEach((amount) => {
@@ -245,6 +250,7 @@ function generateInsights(transactions: Transaction[], byCategory: Record<string
           message: `Unusual charge at ${displayName}`,
           detail: `${fmt(amount)} — over 3× your typical ${fmt(avg)} there`,
           amount: -amount,
+          filterMerchant: normKey,
         })
       }
     })
@@ -260,10 +266,75 @@ function generateInsights(transactions: Transaction[], byCategory: Record<string
       message: `Amazon: ${amazonTxs.length} order${amazonTxs.length !== 1 ? 's' : ''} totalling ${fmt(amazonTotal)}`,
       detail: `${pct}% of your total spend this month`,
       amount: -amazonTotal,
+      filterMerchant: 'amazon',
     })
   }
 
   return insights
+}
+
+/**
+ * Re-aggregate an already-parsed transaction list into an AnalysisResult.
+ * Used when category overrides change so all totals stay in sync.
+ */
+export function recomputeResult(
+  transactions: Transaction[],
+  accountType: AnalysisResult['account_type'],
+  existingDateRange: string,
+): AnalysisResult {
+  const spendingTxs = transactions.filter((tx) =>
+    isSpendingCategory(tx.user_category || tx.original_category || 'Other'),
+  )
+
+  const totalSpent = spendingTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0)
+  const avgTransaction = spendingTxs.length > 0 ? totalSpent / spendingTxs.length : 0
+
+  const byCategory: Record<string, CategoryData> = {}
+  spendingTxs.forEach((tx) => {
+    const category = tx.user_category || tx.original_category || 'Other'
+    if (!byCategory[category]) {
+      byCategory[category] = { total: 0, count: 0, average_transaction: 0, trend: 'stable', top_merchants: [] }
+    }
+    byCategory[category].total += Math.abs(tx.amount)
+    byCategory[category].count += 1
+  })
+
+  Object.entries(byCategory).forEach(([category, data]) => {
+    data.average_transaction = data.count > 0 ? data.total / data.count : 0
+    const catTxs = transactions.filter(
+      (tx) => (tx.user_category || tx.original_category || 'Other') === category,
+    )
+    data.trend = getTrend(catTxs)
+    const mMap = new Map<string, number>()
+    catTxs.forEach((tx) => mMap.set(tx.merchant, (mMap.get(tx.merchant) ?? 0) + tx.amount))
+    data.top_merchants = Array.from(mMap.entries())
+      .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))
+      .slice(0, 3)
+      .map(([merchant, total]) => ({ merchant, total }))
+  })
+
+  const merchantMap = new Map<string, { total: number; count: number }>()
+  spendingTxs.forEach((tx) => {
+    if (!merchantMap.has(tx.merchant)) merchantMap.set(tx.merchant, { total: 0, count: 0 })
+    const m = merchantMap.get(tx.merchant)!
+    m.total += Math.abs(tx.amount)
+    m.count += 1
+  })
+  const topMerchants = Array.from(merchantMap.entries())
+    .sort((a, b) => b[1].total - a[1].total)
+    .slice(0, 5)
+    .map(([merchant, { total, count }]) => ({ merchant, total, count }))
+
+  return {
+    status: 'success',
+    account_type: accountType,
+    summary: { total_spent: totalSpent, transaction_count: spendingTxs.length, date_range: existingDateRange, average_transaction: avgTransaction },
+    by_category: byCategory,
+    insights: generateInsights(spendingTxs, byCategory),
+    anomalies: generateAnomalies(spendingTxs),
+    top_merchants: topMerchants,
+    transactions,
+  }
 }
 
 function generateAnomalies(transactions: Transaction[]) {

@@ -89,7 +89,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
             onClick={() => setSelectedType('personal')}
             className={`px-6 py-3 rounded-full font-medium transition-all ${
               selectedType === 'personal'
-                ? 'bg-purple-600 text-white shadow-lg'
+                ? 'bg-brand-accent text-brand-dark shadow-lg'
                 : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
             }`}
           >
@@ -99,7 +99,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
             onClick={() => setSelectedType('business')}
             className={`px-6 py-3 rounded-full font-medium transition-all ${
               selectedType === 'business'
-                ? 'bg-purple-600 text-white shadow-lg'
+                ? 'bg-brand-accent text-brand-dark shadow-lg'
                 : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
             }`}
           >
@@ -123,10 +123,10 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
           onDragLeave={handleDragLeave}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
-          className={`relative rounded-2xl border-2 border-dashed transition-all p-12 text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+          className={`relative rounded-2xl border-2 border-dashed transition-all p-12 text-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-mid focus:ring-offset-2 ${
             dragActive
-              ? 'border-purple-500 bg-purple-50'
-              : 'border-gray-300 bg-white hover:border-purple-400 hover:bg-purple-50'
+              ? 'border-brand-mid bg-brand-light'
+              : 'border-gray-300 bg-white hover:border-purple-400 hover:bg-brand-light'
           }`}
         >
           <input
@@ -141,7 +141,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
           {/* Icon */}
           <div className="mb-4">
             <svg
-              className="w-16 h-16 mx-auto text-purple-600"
+              className="w-16 h-16 mx-auto text-brand-mid"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -183,7 +183,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
               e.stopPropagation()
               openFilePicker()
             }}
-            className="mt-6 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
+            className="mt-6 px-6 py-2 bg-brand-accent text-brand-dark rounded-lg hover:bg-brand-dark transition-colors font-medium"
           >
             {fileNames.length > 0 ? 'Add More Files' : 'Select Files'}
           </button>
@@ -201,21 +201,21 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
         {/* Info Section */}
         <div className="mt-12 grid md:grid-cols-3 gap-8">
           <div className="text-center">
-            <div className="text-3xl font-bold text-purple-600 mb-2">🔒</div>
+            <div className="text-3xl font-bold text-brand-mid mb-2">🔒</div>
             <h3 className="font-semibold text-gray-900 mb-1">100% Private</h3>
             <p className="text-sm text-gray-600">
               Your data stays on your device. No cloud storage.
             </p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-purple-600 mb-2">⚡</div>
+            <div className="text-3xl font-bold text-brand-mid mb-2">⚡</div>
             <h3 className="font-semibold text-gray-900 mb-1">Instant Analysis</h3>
             <p className="text-sm text-gray-600">
               Get insights in seconds, not hours.
             </p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-purple-600 mb-2">💾</div>
+            <div className="text-3xl font-bold text-brand-mid mb-2">💾</div>
             <h3 className="font-semibold text-gray-900 mb-1">Local History</h3>
             <p className="text-sm text-gray-600">
               Keep track of all your analyses locally.

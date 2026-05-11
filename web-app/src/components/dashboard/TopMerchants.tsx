@@ -24,10 +24,10 @@ export default function TopMerchants({ topMerchants, transactions }: TopMerchant
             <button
               key={`${merchant.merchant}-${index}`}
               onClick={() => setSelectedMerchant(merchant.merchant)}
-              className="w-full flex items-center justify-between py-3 px-2 rounded hover:bg-purple-50 transition border-b border-gray-50 last:border-0 text-left"
+              className="w-full flex items-center justify-between py-3 px-2 rounded hover:bg-brand-light transition border-b border-gray-50 last:border-0 text-left"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-6 h-6 rounded-full bg-purple-100 text-purple-600 text-xs flex items-center justify-center font-bold shrink-0">
+                <div className="w-6 h-6 rounded-full bg-brand-light text-brand-mid text-xs flex items-center justify-center font-bold shrink-0">
                   {index + 1}
                 </div>
                 <div className="min-w-0">

@@ -7,6 +7,8 @@ export interface Insight {
   message: string
   detail?: string
   amount?: number
+  filterMerchant?: string   // normalised merchant name to match related transactions
+  filterCategory?: string   // category name to match related transactions
 }
 export type AppView = 'upload' | 'dashboard'
 export type Trend = 'up' | 'down' | 'stable' | 'insufficient_data'

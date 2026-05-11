@@ -14,10 +14,10 @@ export default function AnomaliesList({ anomalies }: AnomaliesListProps) {
     return (
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 border-l-4 border-l-green-400">
         <div className="flex items-center gap-3">
-          <span className="text-2xl">✓</span>
+          <span className="text-base text-green-500">✓</span>
           <div>
-            <h2 className="font-semibold text-gray-900">No Unusual Transactions</h2>
-            <p className="text-sm text-gray-500">Your spending patterns look normal</p>
+            <p className="text-sm font-medium text-gray-900">No Unusual Transactions</p>
+            <p className="text-xs text-gray-500">Your spending patterns look normal</p>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default function AnomaliesList({ anomalies }: AnomaliesListProps) {
       {anomalies.length > 5 && (
         <button
           onClick={() => setShowAll(!showAll)}
-          className="mt-4 w-full py-2 text-sm font-medium text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+          className="mt-4 w-full py-2 text-sm font-medium text-brand-mid hover:bg-brand-light rounded-lg transition-colors"
         >
           {showAll ? 'Show Less' : `Show All (${anomalies.length})`}
         </button>

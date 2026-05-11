@@ -15,3 +15,28 @@
     @apply text-2xl md:text-3xl font-bold text-gray-900 mb-3;
   }
 }
+
+/* PDF chart-only print mode */
+@media print {
+  /* Hide everything via visibility so children can override — display:none cannot be overridden */
+  body.pdf-print * {
+    visibility: hidden !important;
+  }
+
+  /* Pull the charts div to the top-left of the printed page */
+  body.pdf-print #dashboard-charts {
+    visibility: visible !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    padding: 24px !important;
+    background: white !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Make every descendant of the charts div visible */
+  body.pdf-print #dashboard-charts * {
+    visibility: visible !important;
+  }
+}

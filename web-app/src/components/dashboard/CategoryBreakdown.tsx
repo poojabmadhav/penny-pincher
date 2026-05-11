@@ -7,25 +7,25 @@ interface CategoryBreakdownProps {
   byCategory: AnalysisResult['by_category']
   totalSpent: number
   transactions: Transaction[]
-  onCategoryChange?: (transactionIndex: number, newCategory: string) => void
+  onCategoryChange?: (txKey: string, merchant: string, newCategory: string) => void
 }
 
 const TREND_ICON: Record<Trend, { glyph: string; className: string; label: string }> = {
-  up: { glyph: '▲', className: 'text-red-500', label: 'trending up' },
-  down: { glyph: '▼', className: 'text-green-500', label: 'trending down' },
-  stable: { glyph: '—', className: 'text-gray-400', label: 'stable' },
-  insufficient_data: { glyph: '?', className: 'text-gray-300', label: 'not enough data' },
+  up:               { glyph: '▲', className: 'text-red-500',   label: 'trending up' },
+  down:             { glyph: '▼', className: 'text-green-500', label: 'trending down' },
+  stable:           { glyph: '',  className: '',               label: 'stable' },
+  insufficient_data:{ glyph: '',  className: '',               label: '' },
 }
 
 const BAR_COLORS = [
-  'bg-purple-600',
-  'bg-purple-500',
-  'bg-purple-400',
-  'bg-violet-500',
-  'bg-indigo-500',
-  'bg-purple-300',
-  'bg-violet-400',
-  'bg-indigo-400',
+  'bg-brand-mid',
+  'bg-orange-400',
+  'bg-amber-400',
+  'bg-sky-400',
+  'bg-teal-400',
+  'bg-brand-light',
+  'bg-orange-300',
+  'bg-sky-300',
 ]
 
 export default function CategoryBreakdown({
@@ -62,9 +62,11 @@ export default function CategoryBreakdown({
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-gray-700">{categoryName}</span>
-                  <span className={trend.className} aria-label={trend.label} title={trend.label}>
-                    {trend.glyph}
-                  </span>
+                  {trend.glyph && (
+                    <span className={trend.className} aria-label={trend.label} title={trend.label}>
+                      {trend.glyph}
+                    </span>
+                  )}
                 </div>
                 <span className="text-sm font-semibold text-gray-900">
                   {formatCurrency(categoryData.total, 0)} · {percentage}%

@@ -21,7 +21,7 @@ export default function SummaryCards({
       label: 'Total Spent',
       value: formatCurrency(summary.total_spent),
       subtext: `${accountType} account`,
-      color: 'text-purple-600',
+      color: 'text-brand-mid',
     },
     {
       label: 'Transactions',
@@ -41,7 +41,7 @@ export default function SummaryCards({
       subtext: topCategory
         ? `${formatCurrency(byCategory[topCategory].total)} spent`
         : 'No data',
-      color: 'text-purple-600',
+      color: 'text-brand-mid',
     },
   ]
 
