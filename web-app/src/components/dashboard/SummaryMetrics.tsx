@@ -27,10 +27,13 @@ export default function SummaryMetrics({ cashFlow, transactionCount }: SummaryMe
     {
       label: 'SAVINGS RATE',
       value:
-        cashFlow.income > 0
-          ? `${cashFlow.savingsRate.toFixed(1)}%`
-          : `${transactionCount} txns`,
-      color: cashFlow.income > 0 && cashFlow.savingsRate > 0 ? 'text-blue-600' : 'text-gray-500',
+        cashFlow.income === 0 ? `${transactionCount} txns`
+        : cashFlow.savingsRate <= 0 ? 'Negative'
+        : `${cashFlow.savingsRate.toFixed(1)}%`,
+      color:
+        cashFlow.income === 0 ? 'text-gray-500'
+        : cashFlow.savingsRate <= 0 ? 'text-red-500'
+        : 'text-blue-600',
     },
   ]
 
