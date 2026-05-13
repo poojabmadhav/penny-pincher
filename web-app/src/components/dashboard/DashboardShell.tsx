@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import type { FileRecord, Transaction } from '@/types'
 import type { MonthlyConsolidation } from '@/lib/consolidation'
 import { recomputeResult } from '@/lib/consolidation'
@@ -46,6 +46,7 @@ export default function DashboardShell({
 }: DashboardShellProps) {
   const [activeView, setActiveView] = useState<'dashboard' | 'month'>('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const mainRef = useRef<HTMLElement>(null)
 
   // Push initial history entry when shell mounts (upload → dashboard transition)
   useEffect(() => {
@@ -66,6 +67,11 @@ export default function DashboardShell({
   const [categoryOverrides, setCategoryOverrides] = useState<Record<string, string>>(
     () => loadCategoryOverrides(),
   )
+
+  // Reset scroll to top whenever the view or active month changes
+  useEffect(() => {
+    mainRef.current?.scrollTo({ top: 0 })
+  }, [activeView, consolidation.month])
 
   const effectiveResult = useMemo(() => {
     const overridden = applyOverridesToTransactions(
@@ -112,7 +118,7 @@ export default function DashboardShell({
   }
 
   return (
-    <div className="flex h-dvh md:h-auto overflow-hidden md:overflow-visible">
+    <div className="flex h-dvh overflow-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -137,9 +143,9 @@ export default function DashboardShell({
         />
       </div>
 
-      <div className="flex-1 min-w-0 flex flex-col h-full md:h-auto overflow-hidden md:overflow-visible">
+      <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="bg-brand-dark text-white px-4 md:px-6 py-3 md:py-4 sticky top-0 z-10 shadow-md">
+        <header className="bg-brand-dark text-white px-4 md:px-6 py-3 md:py-4 shrink-0 z-10 shadow-md">
           <div className="flex items-center gap-3">
             <h1 className="text-xl md:text-2xl font-bold text-white shrink-0">PennyPincher</h1>
             <div className="border-l border-brand-mid pl-3 min-w-0">
@@ -152,7 +158,7 @@ export default function DashboardShell({
         </header>
 
         {/* Main Content — extra bottom padding on mobile for tab bar */}
-        <main className="flex-1 overflow-y-auto md:overflow-y-visible overscroll-contain p-3 md:p-6 pb-20 md:pb-6">
+        <main ref={mainRef} className="flex-1 overflow-y-auto overscroll-contain p-3 md:p-6 pb-20 md:pb-6">
           {activeView === 'dashboard' ? (
             <DashboardView allTransactions={allTransactions} onUploadAnother={onUploadAnother} />
           ) : (
