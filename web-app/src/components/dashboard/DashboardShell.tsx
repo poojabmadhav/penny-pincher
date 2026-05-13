@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { useState, useMemo, useEffect, useLayoutEffect, useRef } from 'react'
 import type { FileRecord, Transaction } from '@/types'
 import type { MonthlyConsolidation } from '@/lib/consolidation'
 import { recomputeResult } from '@/lib/consolidation'
@@ -69,8 +69,8 @@ export default function DashboardShell({
   )
 
   // Reset scroll to top whenever the view or active month changes
-  useEffect(() => {
-    mainRef.current?.scrollTo({ top: 0 })
+  useLayoutEffect(() => {
+    if (mainRef.current) mainRef.current.scrollTop = 0
   }, [activeView, consolidation.month])
 
   const effectiveResult = useMemo(() => {

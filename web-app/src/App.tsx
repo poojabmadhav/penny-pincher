@@ -107,24 +107,26 @@ function App() {
     }
   }
 
-  return (
-    <div className="bg-gradient-to-br from-brand-light via-white to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {view === 'upload' || !activeConsolidation ? (
+  if (view === 'upload' || !activeConsolidation) {
+    return (
+      <div className="bg-gradient-to-br from-brand-light via-white to-white min-h-dvh">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <UploadComponent onUpload={handleFilesUpload} />
-        ) : activeConsolidation ? (
-          <DashboardShell
-            consolidation={activeConsolidation}
-            consolidations={consolidations}
-            fileHistory={fileHistory}
-            onUploadAnother={handleUploadAnother}
-            onSelectMonth={handleSelectMonth}
-            onDeleteFile={handleDeleteFile}
-            onDashboardReady={handleDashboardReady}
-          />
-        ) : null}
+        </div>
       </div>
-    </div>
+    )
+  }
+
+  return (
+    <DashboardShell
+      consolidation={activeConsolidation}
+      consolidations={consolidations}
+      fileHistory={fileHistory}
+      onUploadAnother={handleUploadAnother}
+      onSelectMonth={handleSelectMonth}
+      onDeleteFile={handleDeleteFile}
+      onDashboardReady={handleDashboardReady}
+    />
   )
 }
 
