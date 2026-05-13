@@ -152,7 +152,7 @@ export default function DashboardShell({
         </header>
 
         {/* Main Content — extra bottom padding on mobile for tab bar */}
-        <main className="flex-1 overflow-y-auto overscroll-contain p-3 md:p-6 pb-20 md:pb-6">
+        <main className="flex-1 overflow-y-auto md:overflow-y-visible overscroll-contain p-3 md:p-6 pb-20 md:pb-6">
           {activeView === 'dashboard' ? (
             <DashboardView allTransactions={allTransactions} onUploadAnother={onUploadAnother} />
           ) : (
