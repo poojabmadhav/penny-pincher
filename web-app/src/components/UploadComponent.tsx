@@ -76,8 +76,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
           PennyPincher
         </h1>
-        <p className="text-lg md:text-xl text-brand-mid max-w-xl mx-auto flex items-center justify-center gap-1.5">
-          <span>🔒</span>
+        <p className="text-lg md:text-xl text-brand-mid max-w-2xl mx-auto">
           Track where your pennies roll while your data stays on your device.
         </p>
       </div>
