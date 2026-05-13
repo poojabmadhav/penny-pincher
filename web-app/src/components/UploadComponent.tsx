@@ -76,10 +76,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
           PennyPincher
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Understand your spending. Keep your privacy. No bank connections needed.
-        </p>
-        <p className="text-sm text-brand-mid max-w-xl mx-auto mt-3 flex items-center justify-center gap-1.5">
+        <p className="text-lg md:text-xl text-brand-mid max-w-xl mx-auto flex items-center justify-center gap-1.5">
           <span>🔒</span>
           Track where your pennies roll while your data stays on your device.
         </p>
