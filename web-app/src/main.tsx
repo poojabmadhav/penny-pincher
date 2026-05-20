@@ -4,7 +4,7 @@ import { inject } from '@vercel/analytics'
 import './index.css'
 import App from './App.tsx'
 
-inject()
+if (!localStorage.getItem('pp_owner')) inject()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
