@@ -6,6 +6,9 @@ import DashboardShell from '@/components/dashboard/DashboardShell'
 import { loadHistory, saveHistory } from '@/lib/storage'
 import { generateId } from '@/lib/format'
 import { parseCSV } from '@/lib/csvParser'
+import { parseXLSX } from '@/lib/xlsxParser'
+import { parseTXT } from '@/lib/txtParser'
+import { parsePDF } from '@/lib/pdfParser'
 import { consolidateByMonth } from '@/lib/consolidation'
 
 type HistoryState = { appView: AppView }
@@ -54,8 +57,30 @@ function App() {
     const failedFiles: string[] = []
     for (const file of files) {
       try {
-        const csvContent = await file.text()
-        const { transactions } = parseCSV(csvContent, accountType)
+        const ext = file.name.split('.').pop()?.toLowerCase()
+
+        let transactions
+        if (ext === 'xlsx' || ext === 'xls') {
+          const buffer = await file.arrayBuffer()
+          const { transactions: txns } = parseXLSX(buffer, accountType)
+          transactions = txns
+        } else if (ext === 'pdf') {
+          const buffer = await file.arrayBuffer()
+          const { transactions: txns } = await parsePDF(buffer, accountType)
+          transactions = txns
+        } else if (ext === 'txt') {
+          const content = await file.text()
+          const { transactions: txns } = parseTXT(content, accountType)
+          transactions = txns
+        } else {
+          const csvContent = await file.text()
+          const { transactions: txns } = parseCSV(csvContent, accountType)
+          transactions = txns
+        }
+
+        if (!transactions || transactions.length === 0) {
+          throw new Error('No transactions found in this file.')
+        }
         updated = [
           {
             id: generateId(),
@@ -67,13 +92,14 @@ function App() {
           ...updated,
         ]
       } catch (error) {
-        failedFiles.push(`${file.name}: ${error instanceof Error ? error.message : 'Unknown error'}`)
+        const msg = error instanceof Error ? error.message : 'Unknown error'
+        failedFiles.push(`"${file.name}" could not be processed because ${msg}`)
       }
     }
     setFileHistory(updated)
     saveHistory(updated)
     if (failedFiles.length > 0 && onError) {
-      onError(`Failed to upload ${failedFiles.length} file(s): ${failedFiles.join('; ')}`)
+      onError(failedFiles.join('\n'))
     }
   }
 

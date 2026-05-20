@@ -111,7 +111,7 @@ export function normalizeDate(raw: string): string {
 
 // ─── Amount normalisation ─────────────────────────────────────────────────────
 
-function parseAmount(raw: string): number {
+export function parseAmount(raw: string): number {
   if (!raw || raw.trim() === '') return 0
   let s = raw.trim().replace(/['"$£€¥₹\s]/g, '')
 

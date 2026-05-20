@@ -48,18 +48,23 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
   }
 
   const handleFiles = async (files: File[]) => {
-    const csvFiles = files.filter(
-      (f) => f.type === 'text/csv' || f.name.toLowerCase().endsWith('.csv'),
-    )
-    const rejected = files.length - csvFiles.length
-    if (csvFiles.length === 0) {
-      setError('No CSV files found. Please choose .csv exports from your bank.')
+    const SUPPORTED_EXTS = ['.csv', '.xlsx', '.xls', '.txt']
+    const supportedFiles = files.filter((f) => {
+      const ext = '.' + (f.name.split('.').pop()?.toLowerCase() ?? '')
+      return SUPPORTED_EXTS.includes(ext)
+    })
+    const rejected = files.length - supportedFiles.length
+    if (supportedFiles.length === 0) {
+      setError(
+        `Unsupported file type: ${files.map(f => f.name).join(', ')}. ` +
+        `Accepted formats: CSV, XLSX, XLS, TXT.`
+      )
       return
     }
-    setError(rejected > 0 ? `${rejected} non-CSV file(s) skipped.` : '')
-    setFileNames(csvFiles.map((f) => f.name))
+    setError(rejected > 0 ? `${rejected} unsupported file(s) skipped.` : '')
+    setFileNames(supportedFiles.map((f) => f.name))
 
-    await onUpload(csvFiles, selectedType, (errorMsg) => {
+    await onUpload(supportedFiles, selectedType, (errorMsg) => {
       setError(errorMsg)
       setFileNames([])
     })
@@ -108,7 +113,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
           <input
             ref={fileInputRef}
             type="file"
-            accept=".csv,text/csv"
+            accept=".csv,.xlsx,.xls,.txt,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/plain"
             multiple
             onChange={handleChange}
             className="hidden"
@@ -142,10 +147,10 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
           ) : (
             <>
               <p className="text-lg font-semibold text-gray-900 mb-3">
-                Drag your CSV files here
+                Drag your bank files here
               </p>
               <p className="text-sm text-gray-600 max-w-md mx-auto">
-                Drag a .csv file of your financial transactions here for analysis. Data is all yours and not saved or uploaded anywhere beyond your device.
+                Supports CSV, XLSX, XLS, and TXT bank exports. Your data stays on your device — nothing is uploaded anywhere.
               </p>
             </>
           )}
@@ -165,7 +170,7 @@ export default function UploadComponent({ onUpload }: UploadComponentProps) {
         {error && (
           <div
             role="alert"
-            className="mt-4 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700"
+            className="mt-4 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700 whitespace-pre-wrap"
           >
             {error}
           </div>
